@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     var countries = [String]()
     var score = 0
     var correctAnswer = 0
+    var numberOfQuestions = 0
+    var total = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,14 +35,29 @@ class ViewController: UIViewController {
     }
 
     func askQuestion(_ action: UIAlertAction? = nil) {
-        countries.shuffle()
-        correctAnswer = Int.random(in: 0...2)
+        let finalAlert = UIAlertController(title: "Final result", message: "Your final score is \(score)/\(total)", preferredStyle: .alert)
 
-        button1.setImage(UIImage(named: countries[0]), for: .normal)
-        button2.setImage(UIImage(named: countries[1]), for: .normal)
-        button3.setImage(UIImage(named: countries[2]), for: .normal)
+        title = countries[correctAnswer].uppercased() + " Score: \(score)/\(total)"
 
-        title = countries[correctAnswer].uppercased()
+        if numberOfQuestions == total {
+            finalAlert.addAction(UIAlertAction(title: "Play Again", style: .default, handler: resetGame))
+            present(finalAlert, animated: true)
+        } else {
+            countries.shuffle()
+            correctAnswer = Int.random(in: 0...2)
+
+            button1.setImage(UIImage(named: countries[0]), for: .normal)
+            button2.setImage(UIImage(named: countries[1]), for: .normal)
+            button3.setImage(UIImage(named: countries[2]), for: .normal)
+
+            title = countries[correctAnswer].uppercased() + " Score: \(score)/\(total)"
+        }
+    }
+
+    func resetGame(_ action: UIAlertAction? = nil) {
+        numberOfQuestions = 0
+        score = 0
+        askQuestion()
     }
 
     // IB action function for buttons, we cant identify them using tag property
@@ -50,9 +67,10 @@ class ViewController: UIViewController {
             title = "Correct"
             score += 1
         } else {
-            title = "Wrong"
+            title = "Wrong, that's \(countries[sender.tag].uppercased()) flag"
             score -= 1
         }
+        numberOfQuestions += 1
 
         let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
 
