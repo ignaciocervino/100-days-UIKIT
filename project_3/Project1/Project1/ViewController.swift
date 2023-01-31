@@ -27,7 +27,7 @@ class ViewController: UITableViewController {
         }
         pictures.sort()
 
-        print(pictures)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(recommendApp))
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,6 +46,12 @@ class ViewController: UITableViewController {
             vc.title = "\(indexPath.row + 1) of \(pictures.count)"
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+
+    @objc func recommendApp() {
+        let vc = UIActivityViewController(activityItems: ["Hey I recommend this app"], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem // So it works in iPad
+        present(vc, animated: true)
     }
 }
 
