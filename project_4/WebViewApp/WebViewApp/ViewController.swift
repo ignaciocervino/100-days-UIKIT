@@ -73,6 +73,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         // Evaluate the URl to see if is in our safe list
         let url = navigationAction.request.url
+        let alert = UIAlertController(title: "Warning", message: "This page is not allowed", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel))
 
         if let host = url?.host {
             for website in websites {
@@ -81,6 +83,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     return
                 }
             }
+            // Show an alert for not allowed host
+            present(alert,animated: true)
         }
 
         decisionHandler(.cancel)
