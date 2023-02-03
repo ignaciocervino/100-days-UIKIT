@@ -11,7 +11,7 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate {
     var webView: WKWebView!
     var progressView: UIProgressView! // How much of the page was loaded
-    var websites = ["apple.com", "google.com"]
+    var website = ""
 
     override func loadView() { // Gets call before view did load
         webView = WKWebView()
@@ -39,7 +39,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
 
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
 
-        let url = URL(string: "https://" + websites[0])!
+        let url = URL(string: "https://" + website)!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true // Let you go forward o backward in the webview with gestures
     }
@@ -47,9 +47,8 @@ class ViewController: UIViewController, WKNavigationDelegate {
     @objc private func openTapped() {
         let ac = UIAlertController(title: "Open page…", message: nil, preferredStyle: .actionSheet)
 
-        for website in websites {
-            ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
-        }
+        ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
+
 
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem // Tells iOS when it should attach this in iPad
@@ -79,11 +78,9 @@ class ViewController: UIViewController, WKNavigationDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .cancel))
 
         if let host = url?.host {
-            for website in websites {
-                if host.contains(website) {
-                    decisionHandler(.allow)
-                    return
-                }
+            if host.contains(website) {
+                decisionHandler(.allow)
+                return
             }
             // Show an alert for not allowed host
             present(alert,animated: true)

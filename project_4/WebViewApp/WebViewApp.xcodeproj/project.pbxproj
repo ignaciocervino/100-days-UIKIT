@@ -13,6 +13,7 @@
 		E20E5131298AAD75008C6D25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20E512F298AAD75008C6D25 /* Main.storyboard */; };
 		E20E5133298AAD78008C6D25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E20E5132298AAD78008C6D25 /* Assets.xcassets */; };
 		E20E5136298AAD78008C6D25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20E5134298AAD78008C6D25 /* LaunchScreen.storyboard */; };
+		E27597AE298DAF2400BA44A1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27597AD298DAF2400BA44A1 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E20E5132298AAD78008C6D25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E20E5135298AAD78008C6D25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E20E5137298AAD78008C6D25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E27597AD298DAF2400BA44A1 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				E20E5132298AAD78008C6D25 /* Assets.xcassets */,
 				E20E5134298AAD78008C6D25 /* LaunchScreen.storyboard */,
 				E20E5137298AAD78008C6D25 /* Info.plist */,
+				E27597AD298DAF2400BA44A1 /* TableViewController.swift */,
 			);
 			path = WebViewApp;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E27597AE298DAF2400BA44A1 /* TableViewController.swift in Sources */,
 				E20E512E298AAD75008C6D25 /* ViewController.swift in Sources */,
 				E20E512A298AAD75008C6D25 /* AppDelegate.swift in Sources */,
 				E20E512C298AAD75008C6D25 /* SceneDelegate.swift in Sources */,
