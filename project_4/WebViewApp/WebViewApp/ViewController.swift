@@ -10,6 +10,7 @@ import WebKit
 
 class ViewController: UIViewController, WKNavigationDelegate {
     var webView: WKWebView!
+    var progressView: UIProgressView! // How much of the page was loaded
 
     override func loadView() { // Gets call before view did load
         webView = WKWebView()
@@ -21,6 +22,18 @@ class ViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Open", style: .plain, target: self, action: #selector(openTapped))
+
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload))
+
+        progressView = UIProgressView(progressViewStyle: .default)
+        progressView.sizeToFit() // Take as much space as it needs
+        let progressButton = UIBarButtonItem(customView: progressView) // So it can go inside our toolbar
+
+        toolbarItems = [progressButton, spacer, refresh]
+        navigationController?.isToolbarHidden = false
+
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
 
         let url = URL(string: "apple.com")!
         webView.load(URLRequest(url: url))
@@ -42,8 +55,14 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // When finish loading it page 
+        // When finish loading it page
         title = webView.title
+    }
+
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "estimatedProgress" {
+            progressView.progress = Float(webView.estimatedProgress)
+        }
     }
 }
 
