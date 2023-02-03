@@ -42,7 +42,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // When finish loading it page
+        // When finish loading it page 
         title = webView.title
     }
 }
