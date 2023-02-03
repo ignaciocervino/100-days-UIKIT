@@ -16,6 +16,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     override func loadView() { // Gets call before view did load
         webView = WKWebView()
         webView.navigationDelegate = self
+//        webView.translatesAutoresizingMaskIntoConstraints = false
         view = webView
     }
 
@@ -73,7 +74,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
         // Evaluate the URl to see if is in our safe list
         let url = navigationAction.request.url
 
-        if let host = url?.host() {
+        if let host = url?.host {
             for website in websites {
                 if host.contains(website) {
                     decisionHandler(.allow)
