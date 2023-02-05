@@ -17,7 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39a-D3-M8x">
-                                <rect key="frame" x="84.666666666666686" y="100" width="224" height="114"/>
+                                <rect key="frame" x="84.666666666666686" y="93" width="224" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="39a-D3-M8x" secondAttribute="height" multiplier="112:57" id="fM3-FU-hoo"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="spain"/>
                                 <connections>
@@ -25,7 +28,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJj-b7-txv">
-                                <rect key="frame" x="84.666666666666686" y="244" width="224" height="114"/>
+                                <rect key="frame" x="84.666666666666686" y="237" width="224" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YJj-b7-txv" secondAttribute="height" multiplier="112:57" id="nNl-Sz-J81"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="spain"/>
                                 <connections>
@@ -33,7 +39,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WO4-ON-pOu">
-                                <rect key="frame" x="84.666666666666686" y="388" width="224" height="114"/>
+                                <rect key="frame" x="84.666666666666686" y="381" width="224" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="WO4-ON-pOu" secondAttribute="height" multiplier="112:57" id="10d-IT-iAH"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="spain"/>
                                 <connections>
@@ -45,11 +54,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="39a-D3-M8x" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="14c-07-fCg"/>
+                            <constraint firstItem="WO4-ON-pOu" firstAttribute="height" secondItem="YJj-b7-txv" secondAttribute="height" id="1Up-Kn-rmP"/>
                             <constraint firstItem="YJj-b7-txv" firstAttribute="centerX" secondItem="39a-D3-M8x" secondAttribute="centerX" id="1oy-1h-G6X"/>
+                            <constraint firstItem="YJj-b7-txv" firstAttribute="height" secondItem="39a-D3-M8x" secondAttribute="height" id="94k-zv-S4v"/>
                             <constraint firstItem="WO4-ON-pOu" firstAttribute="top" secondItem="YJj-b7-txv" secondAttribute="bottom" constant="30" id="PFL-m3-lfT"/>
                             <constraint firstItem="WO4-ON-pOu" firstAttribute="centerX" secondItem="YJj-b7-txv" secondAttribute="centerX" id="Qgc-gX-Wrs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WO4-ON-pOu" secondAttribute="bottom" constant="10" id="oWT-bX-KUT"/>
                             <constraint firstItem="YJj-b7-txv" firstAttribute="top" secondItem="39a-D3-M8x" secondAttribute="bottom" constant="30" id="z0P-p7-c5g"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="39a-D3-M8x" secondAttribute="top" constant="3" id="zly-54-ybA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="39a-D3-M8x" secondAttribute="top" constant="10" id="zly-54-ybA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="w2g-4H-3oq"/>

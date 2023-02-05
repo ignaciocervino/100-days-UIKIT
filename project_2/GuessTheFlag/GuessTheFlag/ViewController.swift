@@ -23,6 +23,8 @@ class ViewController: UIViewController {
 
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
 
+        view.backgroundColor = .lightGray
+
         button1.layer.borderWidth = 1
         button2.layer.borderWidth = 1
         button3.layer.borderWidth = 1
