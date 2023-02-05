@@ -54,7 +54,10 @@ class ViewController: UIViewController {
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary)) // H means horizontal layout and pipe the edge of the view, this mean we want the label to go to the edges of the view horizontally
         }
 
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1]-[label2]-[label4]-[label4]-[label5]", metrics: nil, views: viewsDictionary))
+        let metrics = ["labelHeight": 88]
+
+        // USING VFL
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", metrics: metrics, views: viewsDictionary))
     }
 
 }
