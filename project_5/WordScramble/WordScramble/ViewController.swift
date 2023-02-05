@@ -56,27 +56,32 @@ class ViewController: UITableViewController {
         let errorTitle: String
         let errorMessage: String
 
-        if isPossible(word: lowerAnswer) {
-            if isOriginal(word: lowerAnswer) {
-                if isReal(word: lowerAnswer) {
-                    usedWords.insert(answer, at: 0)
+        if moreThan3(word: lowerAnswer) {
+            if isPossible(word: lowerAnswer) {
+                if isOriginal(word: lowerAnswer) {
+                    if isReal(word: lowerAnswer) {
+                        usedWords.insert(answer, at: 0)
 
-                    let indexPath = IndexPath(row: 0, section: 0)
-                    tableView.insertRows(at: [indexPath], with: .automatic)
+                        let indexPath = IndexPath(row: 0, section: 0)
+                        tableView.insertRows(at: [indexPath], with: .automatic)
 
-                    return // So it doesn't complain about the constants
+                        return // So it doesn't complain about the constants
+                    } else {
+                        errorTitle = "Word not recognized"
+                        errorMessage = "You can't just make them up, you know!"
+                    }
                 } else {
-                    errorTitle = "Word not recognized"
-                    errorMessage = "You can't just make them up, you know!"
+                    errorTitle = "Word already used"
+                    errorMessage = "Be more original!"
                 }
             } else {
-                errorTitle = "Word already used"
-                errorMessage = "Be more original!"
+                guard let title = title else { return }
+                errorTitle = "Word not possible"
+                errorMessage = "You can't spell that word from \(title.lowercased())."
             }
-        } else {
-            guard let title = title else { return }
+        }else {
             errorTitle = "Word not possible"
-            errorMessage = "You can't spell that word from \(title.lowercased())."
+            errorMessage = "You can't use a word less than 3 letters or same as title."
         }
 
         let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
@@ -108,6 +113,10 @@ class ViewController: UITableViewController {
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
 
         return misspelledRange.location == NSNotFound
+    }
+
+    func moreThan3(word: String) -> Bool {
+        return word.count > 3 && word != title
     }
 
     // TableView methods
