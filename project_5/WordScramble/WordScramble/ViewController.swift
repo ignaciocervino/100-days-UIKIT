@@ -67,29 +67,21 @@ class ViewController: UITableViewController {
 
                         return // So it doesn't complain about the constants
                     } else {
-                        errorTitle = "Word not recognized"
-                        errorMessage = "You can't just make them up, you know!"
+                        showErrorMessage(tile: "Word not recognized", message: "You can't just make them up, you know!")
                     }
                 } else {
-                    errorTitle = "Word already used"
-                    errorMessage = "Be more original!"
+                    showErrorMessage(tile: "Word already used", message: "Be more original!")
                 }
             } else {
                 guard let title = title else { return }
-                errorTitle = "Word not possible"
-                errorMessage = "You can't spell that word from \(title.lowercased())."
+                showErrorMessage(tile: "Word not possible", message: "You can't spell that word from \(title.lowercased()).")
             }
         }else {
-            errorTitle = "Word not possible"
-            errorMessage = "You can't use a word less than 3 letters or same as title."
+            showErrorMessage(tile: "Word not possible", message: "You can't use a word less than 3 letters or same as title.")
         }
-
-        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
     }
 
-    func isPossible(word: String) -> Bool {
+    private func isPossible(word: String) -> Bool {
         guard var tempWord = title?.lowercased() else { return false }
 
         for letter in word {
@@ -103,11 +95,11 @@ class ViewController: UITableViewController {
         return true
     }
 
-    func isOriginal(word: String) -> Bool {
+    private func isOriginal(word: String) -> Bool {
         !usedWords.contains(word)
     }
 
-    func isReal(word: String) -> Bool {
+    private func isReal(word: String) -> Bool {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf8.count) // objc compatibility
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
@@ -115,8 +107,14 @@ class ViewController: UITableViewController {
         return misspelledRange.location == NSNotFound
     }
 
-    func moreThan3(word: String) -> Bool {
-        return word.count > 3 && word != title
+    private func moreThan3(word: String) -> Bool {
+        return word.count >= 3 && word != title
+    }
+
+    private func showErrorMessage(tile: String, message: String) {
+        let ac = UIAlertController(title: tile, message: message, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
 
     // TableView methods
