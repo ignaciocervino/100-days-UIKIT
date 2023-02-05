@@ -14,6 +14,8 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
+
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let startWords = try? String(contentsOf: startWordsURL) {
                 allWords = startWords.components(separatedBy: "\n")
@@ -31,6 +33,24 @@ class ViewController: UITableViewController {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
         tableView.reloadData() // Reload all sections from scratch
+    }
+
+    @objc func promptForAnswer() {
+        let ac = UIAlertController(title: "Enter answer", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak self, weak ac] action in
+            // trailing closure for the action of the submit button
+            guard let answer = ac?.textFields?[0].text else { return }
+            self?.submit(answer)
+        }
+
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+
+    func submit(_ answer: String) {
+
     }
 
     // TableView methods
