@@ -9,11 +9,17 @@ import UIKit
 
 class ViewController: UITableViewController {
     var petitions = [Petition]()
+    var filteredPetitions = [Petition]()
     var urlString: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        loadData()
+        setUpNavigationBar()
+    }
+
+    private func loadData() {
         if navigationController?.tabBarItem.tag == 0 {
             urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
         } else {
@@ -23,13 +29,18 @@ class ViewController: UITableViewController {
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) { // Downloading json using Data
                 parse(json: data)
-                let creditsItem = UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(showCredits))
-                navigationItem.rightBarButtonItem = creditsItem
                 return
             }
         }
 
         showError()
+    }
+
+    private func setUpNavigationBar() {
+        let creditsItem = UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(showCredits))
+        let filter = UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filterPetitions))
+        let reload = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(reloadPetitions))
+        navigationItem.rightBarButtonItems = [filter, creditsItem, reload]
     }
 
     func showError() {
@@ -42,6 +53,30 @@ class ViewController: UITableViewController {
         let ac = UIAlertController(title: "Credits", message: "Data comes from: \(urlString)", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
+    }
+
+    @objc private func reloadPetitions() {
+        loadData()
+        tableView.reloadData()
+    }
+
+    @objc private func filterPetitions() {
+        let ac = UIAlertController(title: "Filter", message: "Petitions should match: ", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Apply", style: .default, handler: { _ in
+            guard let filter = ac.textFields?[0].text else { return }
+            self.filterArray(by: filter)
+            self.petitions = self.filteredPetitions
+            self.tableView.reloadData()
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addTextField { (textField: UITextField!) -> Void in
+            textField.placeholder = "Enter a value"
+        }
+        present(ac, animated: true)
+    }
+
+    private func filterArray(by value: String) {
+        filteredPetitions = petitions.filter { $0.title.contains(value) }
     }
 
     func parse(json: Data) {
