@@ -9,11 +9,10 @@ import UIKit
 
 class ViewController: UITableViewController {
     var petitions = [Petition]()
+    var urlString: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let urlString: String
 
         if navigationController?.tabBarItem.tag == 0 {
             urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
@@ -22,8 +21,10 @@ class ViewController: UITableViewController {
         }
 
         if let url = URL(string: urlString) {
-            if let data = try? Data(contentsOf: url) {
+            if let data = try? Data(contentsOf: url) { // Downloading json using Data
                 parse(json: data)
+                let creditsItem = UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(showCredits))
+                navigationItem.rightBarButtonItem = creditsItem
                 return
             }
         }
@@ -33,6 +34,12 @@ class ViewController: UITableViewController {
 
     func showError() {
         let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+
+    @objc private func showCredits() {
+        let ac = UIAlertController(title: "Credits", message: "Data comes from: \(urlString)", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
     }
