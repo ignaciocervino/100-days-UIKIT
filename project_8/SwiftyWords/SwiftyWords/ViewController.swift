@@ -17,7 +17,12 @@ class ViewController: UIViewController {
     var activatedButtons = [UIButton]()
     var solutions = [String]()
 
-    var score = 0
+    var score = 0 {
+        // Update score label every time is changed
+        didSet {
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
     var level = 1
 
     override func loadView() {
