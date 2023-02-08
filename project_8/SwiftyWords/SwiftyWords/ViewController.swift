@@ -124,6 +124,8 @@ class ViewController: UIViewController {
                 letterButtons.append(letterButton)
             }
         }
+        buttonView.layer.borderWidth = 1
+        buttonView.layer.borderColor = UIColor.lightGray.cgColor
     }
 
     override func viewDidLoad() {
@@ -153,11 +155,21 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
 
-            if score % 7 == 0 {
+            if letterButtons.first(where: { $0.isHidden == false }) == nil {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        } else {
+            let ac = UIAlertController(title: "Wrong guess!", message: "Be careful you will lose points", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: reducePoints))
+            present(ac, animated: true)
+        }
+    }
+
+    func reducePoints(action: UIAlertAction) {
+        if score > 0 {
+            score -= 1
         }
     }
 
