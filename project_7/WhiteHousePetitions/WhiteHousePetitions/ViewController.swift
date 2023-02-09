@@ -14,18 +14,20 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Run that method in the background
-        performSelector(inBackground: #selector(loadData), with: nil)
-        setUpNavigationBar()
-    }
 
-    @objc private func loadData() {
         if navigationController?.tabBarItem.tag == 0 {
             urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
         } else {
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
 
+        // Run that method in the background
+        performSelector(inBackground: #selector(loadData), with: nil)
+
+        setUpNavigationBar()
+    }
+
+    @objc private func loadData() {
         // In order not to freeze the UI, make the networking in another thread, in background
 
         if let url = URL(string: urlString) {
@@ -90,7 +92,9 @@ class ViewController: UITableViewController {
             petitions = jsonPetitions.results
 
             // Update UI in the main thread
-            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         } else {
             performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
