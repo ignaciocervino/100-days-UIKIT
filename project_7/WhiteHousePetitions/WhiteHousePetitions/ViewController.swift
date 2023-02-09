@@ -48,11 +48,9 @@ class ViewController: UITableViewController {
 
     @objc func showError() {
         // Never do UI work on background thread
-        DispatchQueue.main.async { [weak self] in
-            let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            self?.present(ac, animated: true)
-        }
+        let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
     }
 
     @objc private func showCredits() {
