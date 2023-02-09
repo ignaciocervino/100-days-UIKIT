@@ -70,9 +70,14 @@ class ViewController: UITableViewController {
         let ac = UIAlertController(title: "Filter", message: "Petitions should match: ", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Apply", style: .default, handler: { _ in
             guard let filter = ac.textFields?[0].text else { return }
-            self.filterArray(by: filter)
-            self.petitions = self.filteredPetitions
-            self.tableView.reloadData()
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                self?.filterArray(by: filter)
+                DispatchQueue.main.async {
+                    guard let filtered = self?.filteredPetitions else { return }
+                    self?.petitions = filtered
+                    self?.tableView.reloadData()
+                }
+            }
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addTextField { (textField: UITextField!) -> Void in
