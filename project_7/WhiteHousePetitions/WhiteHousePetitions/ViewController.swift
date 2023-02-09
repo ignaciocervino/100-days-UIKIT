@@ -26,13 +26,15 @@ class ViewController: UITableViewController {
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
 
-        if let url = URL(string: urlString) {
-            if let data = try? Data(contentsOf: url) { // Downloading json using Data
-                parse(json: data)
-                return
+        // In order not to freeze the UI, make the networking in another thread, in background
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            if let url = URL(string: self?.urlString ?? "") {
+                if let data = try? Data(contentsOf: url) { // Downloading json using Data
+                    self?.parse(json: data)
+                    return
+                }
             }
         }
-
         showError()
     }
 
