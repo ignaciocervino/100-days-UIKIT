@@ -15,16 +15,20 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadData()
-        setUpNavigationBar()
-    }
-
-    private func loadData() {
         if navigationController?.tabBarItem.tag == 0 {
             urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
         } else {
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
+
+        // Run that method in the background
+        performSelector(inBackground: #selector(loadData), with: nil)
+
+        setUpNavigationBar()
+    }
+
+    @objc private func loadData() {
+        // In order not to freeze the UI, make the networking in another thread, in background
 
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) { // Downloading json using Data
@@ -32,8 +36,9 @@ class ViewController: UITableViewController {
                 return
             }
         }
+        // UI in the main thread
+        performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
 
-        showError()
     }
 
     private func setUpNavigationBar() {
@@ -43,7 +48,8 @@ class ViewController: UITableViewController {
         navigationItem.rightBarButtonItems = [filter, creditsItem, reload]
     }
 
-    func showError() {
+    @objc func showError() {
+        // Never do UI work on background thread
         let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
@@ -64,9 +70,14 @@ class ViewController: UITableViewController {
         let ac = UIAlertController(title: "Filter", message: "Petitions should match: ", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Apply", style: .default, handler: { _ in
             guard let filter = ac.textFields?[0].text else { return }
-            self.filterArray(by: filter)
-            self.petitions = self.filteredPetitions
-            self.tableView.reloadData()
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+                self?.filterArray(by: filter)
+                DispatchQueue.main.async {
+                    guard let filtered = self?.filteredPetitions else { return }
+                    self?.petitions = filtered
+                    self?.tableView.reloadData()
+                }
+            }
         }))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addTextField { (textField: UITextField!) -> Void in
@@ -84,7 +95,13 @@ class ViewController: UITableViewController {
 
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
             petitions = jsonPetitions.results
-            tableView.reloadData()
+
+            // Update UI in the main thread
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        } else {
+            performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
     }
 
