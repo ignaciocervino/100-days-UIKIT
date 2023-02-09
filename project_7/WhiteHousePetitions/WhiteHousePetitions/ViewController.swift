@@ -14,12 +14,12 @@ class ViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadData()
+        // Run that method in the background
+        performSelector(inBackground: #selector(loadData), with: nil)
         setUpNavigationBar()
     }
 
-    private func loadData() {
+    @objc private func loadData() {
         if navigationController?.tabBarItem.tag == 0 {
             urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
         } else {
@@ -27,15 +27,16 @@ class ViewController: UITableViewController {
         }
 
         // In order not to freeze the UI, make the networking in another thread, in background
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-            if let url = URL(string: self?.urlString ?? "") {
-                if let data = try? Data(contentsOf: url) { // Downloading json using Data
-                    self?.parse(json: data)
-                    return
-                }
+
+        if let url = URL(string: urlString) {
+            if let data = try? Data(contentsOf: url) { // Downloading json using Data
+                parse(json: data)
+                return
             }
-            self?.showError()
         }
+        // UI in the main thread
+        performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
+
     }
 
     private func setUpNavigationBar() {
@@ -45,7 +46,7 @@ class ViewController: UITableViewController {
         navigationItem.rightBarButtonItems = [filter, creditsItem, reload]
     }
 
-    func showError() {
+    @objc func showError() {
         // Never do UI work on background thread
         DispatchQueue.main.async { [weak self] in
             let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
@@ -91,9 +92,9 @@ class ViewController: UITableViewController {
             petitions = jsonPetitions.results
 
             // Update UI in the main thread
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.reloadData()
-            }
+            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+        } else {
+            performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
     }
 
