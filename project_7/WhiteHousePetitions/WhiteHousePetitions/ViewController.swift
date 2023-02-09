@@ -34,8 +34,8 @@ class ViewController: UITableViewController {
                     return
                 }
             }
+            self?.showError()
         }
-        showError()
     }
 
     private func setUpNavigationBar() {
@@ -46,9 +46,12 @@ class ViewController: UITableViewController {
     }
 
     func showError() {
-        let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
+        // Never do UI work on background thread
+        DispatchQueue.main.async { [weak self] in
+            let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(ac, animated: true)
+        }
     }
 
     @objc private func showCredits() {
@@ -86,7 +89,11 @@ class ViewController: UITableViewController {
 
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
             petitions = jsonPetitions.results
-            tableView.reloadData()
+
+            // Update UI in the main thread
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
+            }
         }
     }
 
