@@ -78,10 +78,9 @@ class ViewController: UIViewController {
     }
 
     @objc private func submitAction() {
-        guard let guess = txtField.text?.lowercased(), guess.count > 0, let word = wordLabel.text else { return }
+        guard let guess = txtField.text?.lowercased(), guess.count > 0 else { return }
         print("word:  \(actualWord) attempts: \(attempts)")
         if guess.count == 1 && checkLetter(guess) && !usedLetters.contains(guess) {
-            attempts -= 1
             usedLetters.append(guess)
             updateWordLabel(alreadyWon: false)
         } else if guess.count > 1 && guess == actualWord {
@@ -95,6 +94,7 @@ class ViewController: UIViewController {
             attempts -= 1
         }
 
+        guard let word = wordLabel.text else { return }
         if !word.contains("?") {
             updateWordLabel(alreadyWon: true)
             winAlert()
