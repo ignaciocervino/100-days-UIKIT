@@ -15,4 +15,9 @@ class Person: NSObject {
         self.name = name
         self.image = image
     }
+
+    override init() {
+        name = ""
+        image = ""
+    }
 }

@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var people = [Person]()
+    var currentPerson = Person()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,14 +70,26 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let person = people[indexPath.item]
+        currentPerson = people[indexPath.item]
 
+        let askAlert = UIAlertController(title: "Rename or Delete", message: "Do you want to rename the person or delete it?", preferredStyle: .alert)
+        askAlert.addAction(UIAlertAction(title: "Rename", style: .default, handler: renamePerson))
+        askAlert.addAction(UIAlertAction(title: "Delete", style: .default) { [weak self] _ in
+            self?.people.remove(at: indexPath.item)
+            self?.collectionView.deleteItems(at: [indexPath])
+        })
+        present(askAlert ,animated: true)
+
+
+    }
+
+    private func renamePerson(_ action: UIAlertAction) {
         let ac = UIAlertController(title: "Rename person", message: nil, preferredStyle: .alert)
         ac.addTextField()
 
         ac.addAction(UIAlertAction(title: "OK", style: .default) { [weak self, weak ac] _ in
             guard let newName = ac?.textFields?[0].text else { return }
-            person.name = newName
+            self?.currentPerson.name = newName
             self?.collectionView.reloadData()
 
         })
