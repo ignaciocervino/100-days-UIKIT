@@ -14,6 +14,7 @@
 		E2A840E7299B2D7A0041FC25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A840E5299B2D7A0041FC25 /* Main.storyboard */; };
 		E2A840E9299B2D7D0041FC25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2A840E8299B2D7D0041FC25 /* Assets.xcassets */; };
 		E2A840EC299B2D7D0041FC25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2A840EA299B2D7D0041FC25 /* LaunchScreen.storyboard */; };
+		E2A840F3299B40100041FC25 /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = E2A840F2299B40100041FC25 /* FireParticles.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		E2A840E6299B2D7A0041FC25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E2A840E8299B2D7D0041FC25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2A840EB299B2D7D0041FC25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E2A840F2299B40100041FC25 /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				E2A840E5299B2D7A0041FC25 /* Main.storyboard */,
 				E2A840E8299B2D7D0041FC25 /* Assets.xcassets */,
 				E2A840EA299B2D7D0041FC25 /* LaunchScreen.storyboard */,
+				E2A840F2299B40100041FC25 /* FireParticles.sks */,
 			);
 			path = Pachinko;
 			sourceTree = "<group>";
@@ -128,6 +131,7 @@
 			files = (
 				E2A840E7299B2D7A0041FC25 /* Main.storyboard in Resources */,
 				E2A840DE299B2D7A0041FC25 /* GameScene.sks in Resources */,
+				E2A840F3299B40100041FC25 /* FireParticles.sks in Resources */,
 				E2A840E9299B2D7D0041FC25 /* Assets.xcassets in Resources */,
 				E2A840EC299B2D7D0041FC25 /* LaunchScreen.storyboard in Resources */,
 			);
