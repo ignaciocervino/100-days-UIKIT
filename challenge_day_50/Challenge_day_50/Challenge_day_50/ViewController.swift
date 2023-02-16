@@ -71,17 +71,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let photo = photos[indexPath.row]
         let path = getDocumentsDirectory().appendingPathComponent(photo.image)
 
-        cell.photo.image = UIImage(contentsOfFile: path.path)
+//        let cellImg : UIImageView = UIImageView(frame: CGRectMake(5, 5, 40, 40))
+//        cellImg.image = UIImage(contentsOfFile: path.path)
+
+        cell.photo.image = UIImage(contentsOfFile: path.path)//cellImg.image
         cell.caption.text = photo.caption
         print("caption: \(photo.caption)")
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        guard let cell = self.tableView.dequeueReusableCell(withIdentifier: "Photo", for: indexPath) as? PhotoCell, let image = cell.photo.image else {
-            fatalError("Could not dequeue PhotoCell.")
-        }
-        return tableView.frame.width / image.getCropRatio()
+        80
     }
 
 
@@ -91,9 +91,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 }
 
-extension UIImage {
-    func getCropRatio() -> CGFloat {
-        return CGFloat(self.size.width / self.size.height)
-    }
-}
+//extension UIImage {
+//    func getCropRatio() -> CGFloat {
+//        return CGFloat(self.size.width / self.size.height)
+//    }
+//}
 
