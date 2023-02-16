@@ -11,11 +11,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var tableView: UITableView!
     
     var photos = [Photo]()
+    let photoPersistence: PhotoPersisting = PhotoPersistence()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadUI()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        photos = photoPersistence.loadPhotos()
+        tableView.reloadData()
     }
 
     private func loadUI() {
@@ -48,7 +56,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         let photo = Photo(caption: "Unknown", image: imageName)
         photos.append(photo)
-        // save()
+        photoPersistence.save(photos: photos)
         tableView.reloadData()
 
         dismiss(animated: true)
@@ -84,7 +92,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
-            vc.view.image
+            let photo = photos[indexPath.row]
+            vc.selectedImage = photo.image
+            vc.labelValue = photo.caption
+            vc.selectedIndex = indexPath.row
+            vc.title = "\(indexPath.row + 1) of \(photos.count)"
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
 
