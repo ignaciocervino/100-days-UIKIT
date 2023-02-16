@@ -71,12 +71,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let photo = photos[indexPath.row]
         let path = getDocumentsDirectory().appendingPathComponent(photo.image)
 
-//        let cellImg : UIImageView = UIImageView(frame: CGRectMake(5, 5, 40, 40))
-//        cellImg.image = UIImage(contentsOfFile: path.path)
-
-        cell.photo.image = UIImage(contentsOfFile: path.path)//cellImg.image
+        cell.photo.image = UIImage(contentsOfFile: path.path)
         cell.caption.text = photo.caption
-        print("caption: \(photo.caption)")
+
         return cell
     }
 
@@ -86,14 +83,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+            vc.view.image
+        }
     }
 
 }
-
-//extension UIImage {
-//    func getCropRatio() -> CGFloat {
-//        return CGFloat(self.size.width / self.size.height)
-//    }
-//}
 
