@@ -17,9 +17,13 @@ class ViewController: UIViewController {
     var correctAnswer = 0
     var numberOfQuestions = 0
     var total = 10
+    var highScore = 0
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        highScore = defaults.integer(forKey: "Highscore")
 
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
 
@@ -38,12 +42,21 @@ class ViewController: UIViewController {
 
     func askQuestion(_ action: UIAlertAction? = nil) {
         let finalAlert = UIAlertController(title: "Final result", message: "Your final score is \(score)/\(total)", preferredStyle: .alert)
+        finalAlert.addAction(UIAlertAction(title: "Play Again", style: .default, handler: resetGame))
+        let highScoreAlert = UIAlertController(title: "Congratulations!", message: "You have the highest score", preferredStyle: .alert)
+        highScoreAlert.addAction(UIAlertAction(title: "OK", style: .cancel) { _ in
+            self.present(finalAlert, animated: true)
+        })
 
         title = countries[correctAnswer].uppercased() + " Score: \(score)/\(total)"
 
         if numberOfQuestions == total {
-            finalAlert.addAction(UIAlertAction(title: "Play Again", style: .default, handler: resetGame))
-            present(finalAlert, animated: true)
+            if score > highScore {
+                defaults.set(score, forKey: "HighScore")
+                present(highScoreAlert, animated: true)
+            } else {
+                present(finalAlert, animated: true)
+            }
         } else {
             countries.shuffle()
             correctAnswer = Int.random(in: 0...2)
