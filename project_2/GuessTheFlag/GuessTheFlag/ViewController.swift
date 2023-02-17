@@ -78,6 +78,16 @@ class ViewController: UIViewController {
     // IB action function for buttons, we cant identify them using tag property
     @IBAction func buttonTapped(_ sender: UIButton) {
         var title: String
+        let buttonPosition = sender.frame.origin
+        // Animation
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+            sender.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        }) { finished in
+            UIView.animate(withDuration: 1) {
+                sender.transform = .identity
+            }
+        }
+
         if sender.tag == correctAnswer {
             title = "Correct"
             score += 1
