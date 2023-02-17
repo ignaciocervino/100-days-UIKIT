@@ -49,8 +49,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @objc func setFilter(_ action: UIAlertAction) {
-        guard currentFilter != nil else { return }
+        guard currentFilter != nil, currentImage != nil else { return }
         guard let actionTitle = action.title else { return }
+
+        changeFilterBtn.setTitle(actionTitle, for: .normal)
 
         currentFilter = CIFilter(name: actionTitle)
 
