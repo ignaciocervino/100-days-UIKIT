@@ -14,6 +14,7 @@
 		E214DD8C299FC77400C8C1FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E214DD8A299FC77400C8C1FA /* Main.storyboard */; };
 		E214DD8E299FC77600C8C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E214DD8D299FC77600C8C1FA /* Assets.xcassets */; };
 		E214DD91299FC77600C8C1FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E214DD8F299FC77600C8C1FA /* LaunchScreen.storyboard */; };
+		E214DD9A299FCB4000C8C1FA /* WhackSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214DD99299FCB4000C8C1FA /* WhackSlot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		E214DD90299FC77600C8C1FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E214DD97299FC84900C8C1FA /* whackBad.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whackBad.caf; sourceTree = "<group>"; };
 		E214DD98299FC84900C8C1FA /* whack.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whack.caf; sourceTree = "<group>"; };
+		E214DD99299FCB4000C8C1FA /* WhackSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhackSlot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				E214DD82299FC77300C8C1FA /* GameScene.sks */,
 				E214DD86299FC77300C8C1FA /* GameScene.swift */,
 				E214DD88299FC77400C8C1FA /* GameViewController.swift */,
+				E214DD99299FCB4000C8C1FA /* WhackSlot.swift */,
 				E214DD8A299FC77400C8C1FA /* Main.storyboard */,
 				E214DD8D299FC77600C8C1FA /* Assets.xcassets */,
 				E214DD8F299FC77600C8C1FA /* LaunchScreen.storyboard */,
@@ -146,6 +149,7 @@
 			files = (
 				E214DD87299FC77300C8C1FA /* GameScene.swift in Sources */,
 				E214DD89299FC77400C8C1FA /* GameViewController.swift in Sources */,
+				E214DD9A299FCB4000C8C1FA /* WhackSlot.swift in Sources */,
 				E214DD81299FC77300C8C1FA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,7 +304,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -331,7 +335,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
