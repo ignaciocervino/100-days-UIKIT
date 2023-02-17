@@ -62,14 +62,14 @@ class GameScene: SKScene {
                 // they shouldn't have whacked this penguin
                 score -= 5
 
-                run(SKAction.playSoundFileNamed("wackBad.caf", waitForCompletion: false))
+                run(SKAction.playSoundFileNamed("whackBad.caf", waitForCompletion: false))
             } else if node.name == "charEnemy" {
                 // they should have whacked this one
                 wackSlot.charNode.xScale = 0.85
                 wackSlot.charNode.yScale = 0.85
                 score += 1
 
-                run(SKAction.playSoundFileNamed("wack.caf", waitForCompletion: false))
+                run(SKAction.playSoundFileNamed("whack.caf", waitForCompletion: false))
             }
         }
     }
@@ -93,6 +93,7 @@ class GameScene: SKScene {
             gameOver.position = CGPoint(x: 512, y: 384)
             gameOver.zPosition = 1
             addChild(gameOver)
+            run(SKAction.playSoundFileNamed("gameOver.m4a", waitForCompletion: false))
             return
         }
 
