@@ -42,7 +42,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Change Filter"/>
                                 <connections>
-                                    <action selector="changeFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tmg-re-tOC"/>
+                                    <action selector="changeFilter:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wIp-wj-r0I"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KDX-HC-N6g">
@@ -84,10 +84,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="xGh-Sh-SSs"/>
                     <connections>
-                        <outlet property="changeFilter" destination="Mp3-15-MnE" id="evZ-cd-Dzh"/>
-                        <outlet property="imageVIew" destination="qw6-9y-LNp" id="9sZ-nO-wEY"/>
+                        <outlet property="changeFilterBtn" destination="Mp3-15-MnE" id="P2D-hI-onn"/>
+                        <outlet property="imageView" destination="qw6-9y-LNp" id="9sZ-nO-wEY"/>
                         <outlet property="intensity" destination="DoV-h6-BQW" id="a9n-wz-0Rt"/>
-                        <outlet property="save" destination="KDX-HC-N6g" id="fl5-AT-Bhq"/>
+                        <outlet property="saveBtn" destination="KDX-HC-N6g" id="AT1-OT-cZM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
