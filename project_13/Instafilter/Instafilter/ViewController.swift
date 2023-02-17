@@ -13,6 +13,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var intensity: UISlider!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var changeFilterBtn: UIButton!
+    @IBOutlet weak var radiusSlider: UISlider!
     var currentImage: UIImage!
 
     var context: CIContext! // handles rendering
@@ -46,6 +47,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @IBAction func intensityChanged(_ sender: UIButton) {
         applyProcessing()
+    }
+
+    @IBAction func radiusChanged(_ sender: Any) {
+        applyRadius()
     }
 
     @objc func setFilter(_ action: UIAlertAction) {
@@ -90,6 +95,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(ac, animated: true)
     }
 
+    func applyRadius() {
+        guard currentFilter.inputKeys.contains(kCIInputRadiusKey) else { return }
+        currentFilter.setValue(radiusSlider.value * 200, forKey: kCIInputRadiusKey)
+
+        guard let outputImage = currentFilter.outputImage else { return }
+
+        if let cgImage = context.createCGImage(outputImage, from: outputImage.extent) {
+            let processImage = UIImage(cgImage: cgImage)
+            imageView.image = processImage
+        }
+    }
+
     func applyProcessing() {
         let inputKeys = currentFilter.inputKeys
 
@@ -98,9 +115,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             currentFilter.setValue(intensity.value, forKey: kCIInputIntensityKey)
         }
 
-        if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey)
-        }
+//        if inputKeys.contains(kCIInputRadiusKey) {
+//            currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey)
+//        }
 
         if inputKeys.contains(kCIInputScaleKey) {
             currentFilter.setValue(intensity.value * 10, forKey: kCIInputScaleKey)
