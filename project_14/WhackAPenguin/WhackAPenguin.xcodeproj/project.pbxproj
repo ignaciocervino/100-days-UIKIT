@@ -18,6 +18,8 @@
 		E214DD9C299FEE0600C8C1FA /* whackBad.caf in Resources */ = {isa = PBXBuildFile; fileRef = E214DD97299FC84900C8C1FA /* whackBad.caf */; };
 		E214DD9D299FEE0800C8C1FA /* whack.caf in Resources */ = {isa = PBXBuildFile; fileRef = E214DD98299FC84900C8C1FA /* whack.caf */; };
 		E214DDA0299FEFCD00C8C1FA /* gameOver.m4a in Resources */ = {isa = PBXBuildFile; fileRef = E214DD9F299FEF7100C8C1FA /* gameOver.m4a */; };
+		E214DDA2299FF33300C8C1FA /* SmokeEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = E214DDA1299FF33300C8C1FA /* SmokeEffect.sks */; };
+		E214DDA6299FF6D800C8C1FA /* mudEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = E214DDA5299FF6D800C8C1FA /* mudEmitter.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		E214DD98299FC84900C8C1FA /* whack.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whack.caf; sourceTree = "<group>"; };
 		E214DD99299FCB4000C8C1FA /* WhackSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhackSlot.swift; sourceTree = "<group>"; };
 		E214DD9F299FEF7100C8C1FA /* gameOver.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = gameOver.m4a; sourceTree = "<group>"; };
+		E214DDA1299FF33300C8C1FA /* SmokeEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeEffect.sks; sourceTree = "<group>"; };
+		E214DDA5299FF6D800C8C1FA /* mudEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = mudEmitter.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				E214DD80299FC77300C8C1FA /* AppDelegate.swift */,
+				E214DDA1299FF33300C8C1FA /* SmokeEffect.sks */,
 				E214DD82299FC77300C8C1FA /* GameScene.sks */,
 				E214DD86299FC77300C8C1FA /* GameScene.swift */,
 				E214DD88299FC77400C8C1FA /* GameViewController.swift */,
@@ -76,6 +81,7 @@
 				E214DD98299FC84900C8C1FA /* whack.caf */,
 				E214DD97299FC84900C8C1FA /* whackBad.caf */,
 				E214DD9F299FEF7100C8C1FA /* gameOver.m4a */,
+				E214DDA5299FF6D800C8C1FA /* mudEmitter.sks */,
 			);
 			path = WhackAPenguin;
 			sourceTree = "<group>";
@@ -140,6 +146,8 @@
 			files = (
 				E214DD9C299FEE0600C8C1FA /* whackBad.caf in Resources */,
 				E214DD8C299FC77400C8C1FA /* Main.storyboard in Resources */,
+				E214DDA2299FF33300C8C1FA /* SmokeEffect.sks in Resources */,
+				E214DDA6299FF6D800C8C1FA /* mudEmitter.sks in Resources */,
 				E214DD83299FC77300C8C1FA /* GameScene.sks in Resources */,
 				E214DD8E299FC77600C8C1FA /* Assets.xcassets in Resources */,
 				E214DD91299FC77600C8C1FA /* LaunchScreen.storyboard in Resources */,
