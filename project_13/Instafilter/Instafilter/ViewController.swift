@@ -61,8 +61,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 
     @IBAction func save(_ sender: Any) {
-        guard let image = imageView.image else { return }
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        guard let image = imageView.image else {
+            let error = ImageError(description: "Image not found")
+            image(nil, didFinishSavingWithError: error, nil)
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:_:)), nil)
     }
 
     @IBAction func changeFilter(_ sender: UIButton) {
@@ -111,8 +115,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
 
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
+    @objc func image(_ image: UIImage?, didFinishSavingWithError error: Error?, _ contextInfo: UnsafeRawPointer?) {
+        if let error = error as? ImageError {
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
