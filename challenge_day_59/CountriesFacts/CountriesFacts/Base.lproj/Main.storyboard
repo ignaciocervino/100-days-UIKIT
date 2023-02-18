@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Vid-Ia-RgH">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CountryCell" id="Vid-Ia-RgH" customClass="CountryCell" customModule="CountriesFacts" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vid-Ia-RgH" id="PKu-X8-cci">
@@ -55,6 +55,10 @@
                                         <constraint firstAttribute="bottom" secondItem="btV-0f-zZj" secondAttribute="bottom" id="oRt-ks-1w8"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="flagImage" destination="bkq-Li-RyX" id="eYw-Ac-Z05"/>
+                                    <outlet property="flagLabel" destination="dvD-NM-HHG" id="bf9-92-hNX"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

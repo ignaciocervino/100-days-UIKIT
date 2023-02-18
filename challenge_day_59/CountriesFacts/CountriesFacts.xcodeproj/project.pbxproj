@@ -15,6 +15,7 @@
 		E214DDE029A0377900C8C1FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E214DDDE29A0377900C8C1FA /* LaunchScreen.storyboard */; };
 		E214DDE829A0629F00C8C1FA /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214DDE729A0629F00C8C1FA /* Country.swift */; };
 		E214DDEE29A0968B00C8C1FA /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = E214DDED29A0968B00C8C1FA /* countries.json */; };
+		E214DDF029A09B4100C8C1FA /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214DDEF29A09B4100C8C1FA /* CountryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E214DDE129A0377900C8C1FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E214DDE729A0629F00C8C1FA /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		E214DDED29A0968B00C8C1FA /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
+		E214DDEF29A09B4100C8C1FA /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				E214DDD529A0377600C8C1FA /* SceneDelegate.swift */,
 				E214DDD729A0377600C8C1FA /* ViewController.swift */,
 				E214DDE729A0629F00C8C1FA /* Country.swift */,
+				E214DDEF29A09B4100C8C1FA /* CountryCell.swift */,
 				E214DDD929A0377600C8C1FA /* Main.storyboard */,
 				E214DDDC29A0377900C8C1FA /* Assets.xcassets */,
 				E214DDDE29A0377900C8C1FA /* LaunchScreen.storyboard */,
@@ -147,6 +150,7 @@
 			files = (
 				E214DDD829A0377600C8C1FA /* ViewController.swift in Sources */,
 				E214DDD429A0377600C8C1FA /* AppDelegate.swift in Sources */,
+				E214DDF029A09B4100C8C1FA /* CountryCell.swift in Sources */,
 				E214DDE829A0629F00C8C1FA /* Country.swift in Sources */,
 				E214DDD629A0377600C8C1FA /* SceneDelegate.swift in Sources */,
 			);

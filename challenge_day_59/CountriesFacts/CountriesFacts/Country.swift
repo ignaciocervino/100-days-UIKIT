@@ -11,7 +11,7 @@ import Foundation
 struct Country: Codable {
     let name, capital: String
     let population: Int
-//    let flags: Flags
+    let flags: Flags
 }
 
 // MARK: - Flags
