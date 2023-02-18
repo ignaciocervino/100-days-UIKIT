@@ -13,6 +13,8 @@
 		E214DDDB29A0377600C8C1FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E214DDD929A0377600C8C1FA /* Main.storyboard */; };
 		E214DDDD29A0377900C8C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E214DDDC29A0377900C8C1FA /* Assets.xcassets */; };
 		E214DDE029A0377900C8C1FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E214DDDE29A0377900C8C1FA /* LaunchScreen.storyboard */; };
+		E214DDE829A0629F00C8C1FA /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214DDE729A0629F00C8C1FA /* Country.swift */; };
+		E214DDEE29A0968B00C8C1FA /* countries.json in Resources */ = {isa = PBXBuildFile; fileRef = E214DDED29A0968B00C8C1FA /* countries.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		E214DDDC29A0377900C8C1FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E214DDDF29A0377900C8C1FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E214DDE129A0377900C8C1FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E214DDE729A0629F00C8C1FA /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		E214DDED29A0968B00C8C1FA /* countries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countries.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +63,12 @@
 				E214DDD329A0377600C8C1FA /* AppDelegate.swift */,
 				E214DDD529A0377600C8C1FA /* SceneDelegate.swift */,
 				E214DDD729A0377600C8C1FA /* ViewController.swift */,
+				E214DDE729A0629F00C8C1FA /* Country.swift */,
 				E214DDD929A0377600C8C1FA /* Main.storyboard */,
 				E214DDDC29A0377900C8C1FA /* Assets.xcassets */,
 				E214DDDE29A0377900C8C1FA /* LaunchScreen.storyboard */,
 				E214DDE129A0377900C8C1FA /* Info.plist */,
+				E214DDED29A0968B00C8C1FA /* countries.json */,
 			);
 			path = CountriesFacts;
 			sourceTree = "<group>";
@@ -127,6 +133,7 @@
 			files = (
 				E214DDE029A0377900C8C1FA /* LaunchScreen.storyboard in Resources */,
 				E214DDDD29A0377900C8C1FA /* Assets.xcassets in Resources */,
+				E214DDEE29A0968B00C8C1FA /* countries.json in Resources */,
 				E214DDDB29A0377600C8C1FA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -140,6 +147,7 @@
 			files = (
 				E214DDD829A0377600C8C1FA /* ViewController.swift in Sources */,
 				E214DDD429A0377600C8C1FA /* AppDelegate.swift in Sources */,
+				E214DDE829A0629F00C8C1FA /* Country.swift in Sources */,
 				E214DDD629A0377600C8C1FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
