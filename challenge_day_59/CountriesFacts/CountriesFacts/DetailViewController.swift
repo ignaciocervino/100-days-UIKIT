@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
     private func loadData() {
         guard let country = country, let flagImage = flag else { fatalError("country is nil") }
 
-        title = country.name
+        title = "\(country.name) facts"
         countryFlag.image = flagImage
         countryNameLbl.text = "Name: \(country.name)"
         capitalLbl.text = "Capital: \(country.capital)"
