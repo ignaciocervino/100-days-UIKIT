@@ -75,13 +75,62 @@
         <!--Detail View Controller-->
         <scene sceneID="5bG-MV-OIq">
             <objects>
-                <viewController id="XyO-fd-503" customClass="DetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Detail" id="XyO-fd-503" customClass="DetailViewController" customModule="CountriesFacts" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ya7-TX-hbs">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9b3-1p-GkI" userLabel="CountryFlag">
+                                <rect key="frame" x="0.0" y="69" width="393" height="267"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nzq-og-CAC" userLabel="CountryName">
+                                <rect key="frame" x="50" y="386" width="293" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="QHX-Vx-Vib"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="899-3o-580" userLabel="Capital">
+                                <rect key="frame" x="50" y="476" width="293" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQi-Ye-nrI" userLabel="Population">
+                                <rect key="frame" x="50" y="547" width="293" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Aux-dI-2Fa"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="899-3o-580" firstAttribute="height" secondItem="Nzq-og-CAC" secondAttribute="height" multiplier="0.525" id="0tr-vN-0NN"/>
+                            <constraint firstItem="9b3-1p-GkI" firstAttribute="leading" secondItem="Aux-dI-2Fa" secondAttribute="leading" id="3ey-vf-T3s"/>
+                            <constraint firstItem="cQi-Ye-nrI" firstAttribute="top" secondItem="899-3o-580" secondAttribute="bottom" constant="50" id="607-SJ-fhC"/>
+                            <constraint firstItem="Aux-dI-2Fa" firstAttribute="trailing" secondItem="899-3o-580" secondAttribute="trailing" constant="50" id="ADL-3W-JYI"/>
+                            <constraint firstItem="Nzq-og-CAC" firstAttribute="top" secondItem="9b3-1p-GkI" secondAttribute="bottom" constant="50" id="AtX-bT-D9d"/>
+                            <constraint firstItem="9b3-1p-GkI" firstAttribute="top" secondItem="Aux-dI-2Fa" secondAttribute="top" constant="10" id="DPK-59-NdU"/>
+                            <constraint firstItem="Aux-dI-2Fa" firstAttribute="trailing" secondItem="cQi-Ye-nrI" secondAttribute="trailing" constant="50" id="Gx5-bB-MQ9"/>
+                            <constraint firstItem="Nzq-og-CAC" firstAttribute="leading" secondItem="Aux-dI-2Fa" secondAttribute="leading" constant="50" id="O9P-bP-uQZ"/>
+                            <constraint firstItem="cQi-Ye-nrI" firstAttribute="leading" secondItem="Aux-dI-2Fa" secondAttribute="leading" constant="50" id="Qq0-1K-Cjx"/>
+                            <constraint firstItem="Aux-dI-2Fa" firstAttribute="trailing" secondItem="Nzq-og-CAC" secondAttribute="trailing" constant="50" id="VSY-iP-PlM"/>
+                            <constraint firstItem="899-3o-580" firstAttribute="top" secondItem="Nzq-og-CAC" secondAttribute="bottom" constant="50" id="Y2X-cv-iXM"/>
+                            <constraint firstItem="Aux-dI-2Fa" firstAttribute="trailing" secondItem="9b3-1p-GkI" secondAttribute="trailing" id="aln-9f-3c2"/>
+                            <constraint firstItem="cQi-Ye-nrI" firstAttribute="height" secondItem="Nzq-og-CAC" secondAttribute="height" multiplier="0.525" id="rWj-iL-GB8"/>
+                            <constraint firstItem="899-3o-580" firstAttribute="leading" secondItem="Aux-dI-2Fa" secondAttribute="leading" constant="50" id="wvA-ah-qDJ"/>
+                            <constraint firstItem="Aux-dI-2Fa" firstAttribute="bottom" secondItem="cQi-Ye-nrI" secondAttribute="bottom" constant="250" id="za3-mA-iKn"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="capitalLbl" destination="899-3o-580" id="HYF-4J-V7F"/>
+                        <outlet property="countryFlag" destination="9b3-1p-GkI" id="otg-4W-ukX"/>
+                        <outlet property="countryNameLbl" destination="Nzq-og-CAC" id="gIw-qA-RRa"/>
+                        <outlet property="populationLbl" destination="cQi-Ye-nrI" id="Jdu-My-W0d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cuo-CZ-vDC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
