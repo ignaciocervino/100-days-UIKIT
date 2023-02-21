@@ -1,0 +1,47 @@
+[
+  {
+    "name": "Argentina",
+    "capital": "Buenos Aires",
+    "population": 45376763,
+    "flags": {
+      "svg": "https://flagcdn.com/ar.svg",
+      "png": "https://flagcdn.com/w320/ar.png"
+    }
+  },
+  {
+    "name": "Ecuador",
+    "capital": "Quito",
+    "population": 17643060,
+    "flags": {
+      "svg": "https://flagcdn.com/ec.svg",
+      "png": "https://flagcdn.com/w320/ec.png"
+    }
+  },
+  {
+    "name": "Honduras",
+    "capital": "Tegucigalpa",
+    "population": 9904608,
+    "flags": {
+      "svg": "https://flagcdn.com/hn.svg",
+      "png": "https://flagcdn.com/w320/hn.png"
+    }
+  },
+  {
+    "name": "Mexico",
+    "capital": "Mexico City",
+    "population": 128932753,
+    "flags": {
+      "svg": "https://flagcdn.com/mx.svg",
+      "png": "https://flagcdn.com/w320/mx.png"
+    }
+  },
+  {
+    "name": "Paraguay",
+    "capital": "Asunción",
+    "population": 7132530,
+    "flags": {
+      "svg": "https://flagcdn.com/py.svg",
+      "png": "https://flagcdn.com/w320/py.png"
+    }
+  }
+]
