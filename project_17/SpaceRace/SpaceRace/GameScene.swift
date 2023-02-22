@@ -55,6 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameTime -= 0.1
             gameTimer?.invalidate()
             gameTimer = nil
+            enemiesCount = 0
         }
 
         if gameTimer == nil {
