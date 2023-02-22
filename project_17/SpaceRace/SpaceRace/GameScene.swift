@@ -92,6 +92,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.position = location
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+
+        if touch.location(in: self) != player.position {
+            player.isUserInteractionEnabled = true
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        player.isUserInteractionEnabled = false
+    }
+
     func didBegin(_ contact: SKPhysicsContact) {
         let explosion = SKEmitterNode(fileNamed: "explosion")!
         explosion.position = player.position
