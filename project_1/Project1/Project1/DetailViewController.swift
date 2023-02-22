@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .never
 
         guard let imageToLoad = selectedImage else { return }
+        assert(selectedImage != nil, "Selected image is nil!")
         imageView.image = UIImage(named: imageToLoad)
     }
 
