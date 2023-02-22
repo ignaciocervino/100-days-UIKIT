@@ -14,6 +14,7 @@
 		E214DE0929A558DC00C8C1FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E214DE0829A558DC00C8C1FA /* Assets.xcassets */; };
 		E214DE0C29A558DC00C8C1FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E214DE0A29A558DC00C8C1FA /* LaunchScreen.storyboard */; };
 		E214DE1429A55B5800C8C1FA /* Capital.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214DE1329A55B5800C8C1FA /* Capital.swift */; };
+		E214DE1629A5C90300C8C1FA /* WikipediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214DE1529A5C90300C8C1FA /* WikipediaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		E214DE0B29A558DC00C8C1FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E214DE0D29A558DC00C8C1FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E214DE1329A55B5800C8C1FA /* Capital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capital.swift; sourceTree = "<group>"; };
+		E214DE1529A5C90300C8C1FA /* WikipediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikipediaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				E214DDFF29A558D900C8C1FA /* AppDelegate.swift */,
 				E214DE0129A558D900C8C1FA /* SceneDelegate.swift */,
 				E214DE0329A558DA00C8C1FA /* ViewController.swift */,
+				E214DE1529A5C90300C8C1FA /* WikipediaViewController.swift */,
 				E214DE1329A55B5800C8C1FA /* Capital.swift */,
 				E214DE0529A558DA00C8C1FA /* Main.storyboard */,
 				E214DE0829A558DC00C8C1FA /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 				E214DE0429A558DA00C8C1FA /* ViewController.swift in Sources */,
 				E214DE0029A558D900C8C1FA /* AppDelegate.swift in Sources */,
 				E214DE1429A55B5800C8C1FA /* Capital.swift in Sources */,
+				E214DE1629A5C90300C8C1FA /* WikipediaViewController.swift in Sources */,
 				E214DE0229A558D900C8C1FA /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
