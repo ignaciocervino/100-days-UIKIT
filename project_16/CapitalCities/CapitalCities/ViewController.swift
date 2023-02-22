@@ -27,6 +27,34 @@ class ViewController: UIViewController, MKMapViewDelegate {
 //        mapView.addAnnotation(washington)
 
         mapView.addAnnotations([london, oslo, paris, rome, washington])
+        chooseMapType()
+    }
+
+    private func chooseMapType() {
+        let ac = UIAlertController(title: "Map style", message: "Choose the type of map you want", preferredStyle: .actionSheet)
+
+        ac.addAction(UIAlertAction(title: "Standard", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .standard
+        }))
+        ac.addAction(UIAlertAction(title: "Muted Standard", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .mutedStandard
+        }))
+        ac.addAction(UIAlertAction(title: "Satellite", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .satellite
+        }))
+        ac.addAction(UIAlertAction(title: "Satellite Flyover", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .satelliteFlyover
+        }))
+        ac.addAction(UIAlertAction(title: "Hybrid", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .hybrid
+        }))
+        ac.addAction(UIAlertAction(title: "Hybrid Flyover", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .hybridFlyover
+        }))
+        ac.addAction(UIAlertAction(title: "Cancel", style: .destructive))
+
+        present(ac, animated: true)
+
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
