@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var possibleEnemies = ["ball", "hammer", "tv"]
     var gameTimer: Timer?
     var isGameOver = false
+    var touchingPlayer = true
 
     var score = 0 {
         didSet {
@@ -89,19 +90,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             location.y = 668
         }
 
-        player.position = location
+        if touchingPlayer {
+            player.position = location
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
 
-        if touch.location(in: self) != player.position {
-            player.isUserInteractionEnabled = true
+        let playerXposition =  (player.position.x - player.size.width/2)...(player.position.x + player.size.width/2)
+        let playerYposition =  (player.position.y - player.size.height/2)...(player.position.y + player.size.height/2)
+
+        if !playerXposition.contains(location.x) && !playerYposition.contains(location.y) {
+            touchingPlayer = false
         }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        player.isUserInteractionEnabled = false
+        touchingPlayer = true
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
