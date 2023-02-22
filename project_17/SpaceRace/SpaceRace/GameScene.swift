@@ -51,16 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.gravity = .zero // we are in the space!
         physicsWorld.contactDelegate = self // tell us when contact happens
 
-        if enemiesCount >= 20 {
-            gameTime -= 0.1
-            gameTimer?.invalidate()
-            gameTimer = nil
-            enemiesCount = 0
-        }
-
-        if gameTimer == nil {
-            gameTimer = Timer.scheduledTimer(timeInterval: gameTime, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
-        }
+//        gameTimer = Timer.scheduledTimer(timeInterval: gameTime, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
     }
 
     @objc private func createEnemy() {
@@ -78,6 +69,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sprite.physicsBody?.angularDamping = 0
 
         enemiesCount += 1
+        print(enemiesCount)
+
+        if enemiesCount == 20 {
+            gameTime -= 0.1
+            gameTimer?.invalidate()
+            gameTimer = nil
+            enemiesCount = 0
+        }
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -89,6 +88,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if !isGameOver {
             score += 1
+        }
+
+        if gameTimer == nil {
+            print("timer \(gameTime)")
+            gameTimer = Timer.scheduledTimer(timeInterval: gameTime, target: self, selector: #selector(createEnemy), userInfo: nil, repeats: true)
         }
     }
 
