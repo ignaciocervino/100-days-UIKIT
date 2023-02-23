@@ -16,6 +16,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var reload: SKSpriteNode!
     var gameTimer: Timer?
     let gameTime = 60.0
+    var duckTimer: Timer?
+    var duckTime = 1.0
+
     var possibleTargets = ["target1", "target2", "target3"]
 
     var targetSpeed = 4.0
@@ -47,8 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         setUpStaticUI()
         createGameTimer()
-
-
+        startDuckTimer()
     }
 
     private func setUpStaticUI() {
@@ -56,6 +58,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cursor.position = CGPoint(x: 512, y: 384)
         cursor.physicsBody = SKPhysicsBody(texture: cursor.texture!, size: cursor.size)
         cursor.physicsBody?.contactTestBitMask = 1
+        cursor.physicsBody?.categoryBitMask = 1
+        cursor.physicsBody?.categoryBitMask = 0
         addChild(cursor)
 
         backgroundColor = .cyan
@@ -64,6 +68,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.position = CGPoint(x: 512, y: 384)
         background.size = view!.bounds.size
         background.zPosition = -1
+        background.physicsBody?.categoryBitMask = 1
+        background.physicsBody?.categoryBitMask = 0
         addChild(background)
 
         var rowYPosition = 590
@@ -72,6 +78,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             rows.position = CGPoint(x: 512, y: rowYPosition)
             rows.size.width = background.size.width
             rows.zPosition = -2
+            rows.physicsBody?.categoryBitMask = 1
+            rows.physicsBody?.categoryBitMask = 0
             addChild(rows)
 
             rowYPosition -= 140
@@ -119,6 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let touch = touches.first, !isGameOver else { return }
         let location = touch.location(in: self)
         let touchedNode = self.nodes(at: location)
+//        let targetNode = atPoint(location) as! SKSpriteNode
 
         cursor.position = location
 
@@ -127,7 +136,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             run(SKAction.playSoundFileNamed("shot.wav", waitForCompletion: false))
             bulletsInClip -= 1
 
-            //            shot(at: location)
+            for node in touchedNode {
+                if possibleTargets.contains(node.name ?? "") {
+                    print("shot")
+                }
+            }
+
         } else {
             reload.isHidden = false
             run(SKAction.playSoundFileNamed("empty.wav", waitForCompletion: false))
@@ -139,13 +153,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 run(SKAction.playSoundFileNamed("reload.wav", waitForCompletion: false))
             }
-        }
-    }
-
-    private func checkReloading(at location: CGPoint) {
-
-        if location == reload.position {
-            reload.run(SKAction.rotate(toAngle: .pi / 4, duration: 0.5))
         }
     }
     
@@ -165,13 +172,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     @objc private func showGameOver() {
         isGameOver = true
+        duckTimer?.invalidate()
+
         gameOver = SKSpriteNode(imageNamed: "game-over")
         gameOver.position = CGPoint(x: 512, y: 384)
         gameOver.physicsBody = SKPhysicsBody(texture: gameOver.texture!, size: gameOver.size)
         addChild(gameOver)
     }
 
+    func startDuckTimer() {
+        duckTimer = Timer.scheduledTimer(timeInterval: duckTime, target: self, selector: #selector(createDuck), userInfo: nil, repeats: true)
+    }
+
     @objc private func createDuck() {
-        print("duck")
+        guard let duck = possibleTargets.randomElement(), let tableHeight = [580, 440, 300].randomElement() else { return }
+
+        let sprite = SKSpriteNode(imageNamed: duck)
+        sprite.position = CGPoint(x: 1200, y: tableHeight)
+        sprite.physicsBody = SKPhysicsBody(texture: sprite.texture!, size: sprite.size)
+        sprite.zPosition = -2
+        sprite.name = duck
+        addChild(sprite)
+
+        sprite.physicsBody?.categoryBitMask = 1
+        sprite.physicsBody?.categoryBitMask = 0
+        sprite.physicsBody?.velocity = CGVector(dx: -500, dy: 0)
     }
 }
