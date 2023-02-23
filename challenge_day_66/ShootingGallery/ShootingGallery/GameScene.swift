@@ -12,8 +12,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bulletsSprite: SKSpriteNode!
     var scoreLabel: SKLabelNode!
     var cursor: SKSpriteNode!
+    var gameOver: SKSpriteNode!
     var reload: SKSpriteNode!
-    var gameTimer: CADisplayLink?
+    var gameTimer: Timer?
+    let gameTime = 60.0
     var possibleTargets = ["target1", "target2", "target3"]
 
     var targetSpeed = 4.0
@@ -44,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         setUpStaticUI()
-
+        createGameTimer()
 
 
     }
@@ -114,7 +116,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
+        guard let touch = touches.first, !isGameOver else { return }
         let location = touch.location(in: self)
         let touchedNode = self.nodes(at: location)
 
@@ -148,10 +150,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+//        createDisplayLink()
         // Called before each frame is rendered
 //        gameTimer = CADisplayLink(target: self, selector: #selector(createDuck))
 //        gameTimer?.add(to: .current, forMode: .common)
 
+    }
+
+
+
+    func createGameTimer() {
+        gameTimer = Timer.scheduledTimer(timeInterval: gameTime, target: self, selector: #selector(showGameOver), userInfo: nil, repeats: false)
+    }
+
+    @objc private func showGameOver() {
+        isGameOver = true
+        gameOver = SKSpriteNode(imageNamed: "game-over")
+        gameOver.position = CGPoint(x: 512, y: 384)
+        gameOver.physicsBody = SKPhysicsBody(texture: gameOver.texture!, size: gameOver.size)
+        addChild(gameOver)
     }
 
     @objc private func createDuck() {
