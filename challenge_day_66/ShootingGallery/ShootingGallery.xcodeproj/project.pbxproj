@@ -14,6 +14,9 @@
 		E210054529A71D59008B2658 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E210054329A71D59008B2658 /* Main.storyboard */; };
 		E210054729A71D5C008B2658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E210054629A71D5C008B2658 /* Assets.xcassets */; };
 		E210054A29A71D5C008B2658 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E210054829A71D5C008B2658 /* LaunchScreen.storyboard */; };
+		E210055429A720F4008B2658 /* shot.wav in Resources */ = {isa = PBXBuildFile; fileRef = E210055129A720F4008B2658 /* shot.wav */; };
+		E210055529A720F4008B2658 /* empty.wav in Resources */ = {isa = PBXBuildFile; fileRef = E210055229A720F4008B2658 /* empty.wav */; };
+		E210055629A720F4008B2658 /* reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = E210055329A720F4008B2658 /* reload.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +28,9 @@
 		E210054429A71D59008B2658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E210054629A71D5C008B2658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E210054929A71D5C008B2658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E210055129A720F4008B2658 /* shot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shot.wav; sourceTree = "<group>"; };
+		E210055229A720F4008B2658 /* empty.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = empty.wav; sourceTree = "<group>"; };
+		E210055329A720F4008B2658 /* reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reload.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,10 +68,21 @@
 				E210053F29A71D59008B2658 /* GameScene.swift */,
 				E210054129A71D59008B2658 /* GameViewController.swift */,
 				E210054329A71D59008B2658 /* Main.storyboard */,
-				E210054629A71D5C008B2658 /* Assets.xcassets */,
 				E210054829A71D5C008B2658 /* LaunchScreen.storyboard */,
+				E210054629A71D5C008B2658 /* Assets.xcassets */,
+				E210055029A720D9008B2658 /* Sounds */,
 			);
 			path = ShootingGallery;
+			sourceTree = "<group>";
+		};
+		E210055029A720D9008B2658 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E210055229A720F4008B2658 /* empty.wav */,
+				E210055329A720F4008B2658 /* reload.wav */,
+				E210055129A720F4008B2658 /* shot.wav */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,7 +143,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E210055429A720F4008B2658 /* shot.wav in Resources */,
 				E210054529A71D59008B2658 /* Main.storyboard in Resources */,
+				E210055529A720F4008B2658 /* empty.wav in Resources */,
+				E210055629A720F4008B2658 /* reload.wav in Resources */,
 				E210053C29A71D59008B2658 /* GameScene.sks in Resources */,
 				E210054729A71D5C008B2658 /* Assets.xcassets in Resources */,
 				E210054A29A71D5C008B2658 /* LaunchScreen.storyboard in Resources */,
