@@ -127,33 +127,49 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard let touch = touches.first, !isGameOver else { return }
         let location = touch.location(in: self)
         let touchedNode = self.nodes(at: location)
-//        let targetNode = atPoint(location) as! SKSpriteNode
 
         cursor.position = location
-
-
-        if bulletsInClip > 0 {
-            run(SKAction.playSoundFileNamed("shot.wav", waitForCompletion: false))
-            bulletsInClip -= 1
-
-            for node in touchedNode {
-                if possibleTargets.contains(node.name ?? "") {
-                    print("shot")
-                }
-            }
-
-        } else {
-            reload.isHidden = false
-            run(SKAction.playSoundFileNamed("empty.wav", waitForCompletion: false))
-
+        if bulletsInClip <= 0 {
             if touchedNode.contains(reload) {
                 reload.run(SKAction.rotate(byAngle: .pi * 2 , duration: 0.5)) { [weak self] in
                     self?.bulletsInClip = 3
                     self?.reload.isHidden = true
                 }
                 run(SKAction.playSoundFileNamed("reload.wav", waitForCompletion: false))
+            } else {
+                run(SKAction.playSoundFileNamed("empty.wav", waitForCompletion: false))
             }
+        } else {
+            run(SKAction.playSoundFileNamed("shot.wav", waitForCompletion: false))
+
+            for node in touchedNode {
+                if possibleTargets.contains(node.name ?? "") {
+                    shot(node)
+                }
+            }
+            bulletsInClip -= 1
         }
+
+        if(bulletsInClip == 0) {
+            reload.isHidden = false
+        }
+    }
+
+    private func shot(_ node: SKNode) {
+        guard node.name != "" else { return }
+
+        switch node.name {
+        case possibleTargets[0]: score += 5
+        case possibleTargets[1]: score += 10
+        case possibleTargets[2]: score -= 10
+        default: break
+        }
+        if let fireEffect = SKEmitterNode(fileNamed: "FireParticles") {
+            fireEffect.position = node.position
+            addChild(fireEffect)
+        }
+        node.removeFromParent()
+
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -177,6 +193,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOver = SKSpriteNode(imageNamed: "game-over")
         gameOver.position = CGPoint(x: 512, y: 384)
         gameOver.physicsBody = SKPhysicsBody(texture: gameOver.texture!, size: gameOver.size)
+        gameOver.physicsBody?.categoryBitMask = 1
+        gameOver.physicsBody?.categoryBitMask = 0
         addChild(gameOver)
     }
 

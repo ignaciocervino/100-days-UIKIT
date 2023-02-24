@@ -17,6 +17,7 @@
 		E210055429A720F4008B2658 /* shot.wav in Resources */ = {isa = PBXBuildFile; fileRef = E210055129A720F4008B2658 /* shot.wav */; };
 		E210055529A720F4008B2658 /* empty.wav in Resources */ = {isa = PBXBuildFile; fileRef = E210055229A720F4008B2658 /* empty.wav */; };
 		E210055629A720F4008B2658 /* reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = E210055329A720F4008B2658 /* reload.wav */; };
+		E210055829A83001008B2658 /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = E210055729A83000008B2658 /* FireParticles.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		E210055129A720F4008B2658 /* shot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shot.wav; sourceTree = "<group>"; };
 		E210055229A720F4008B2658 /* empty.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = empty.wav; sourceTree = "<group>"; };
 		E210055329A720F4008B2658 /* reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reload.wav; sourceTree = "<group>"; };
+		E210055729A83000008B2658 /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticles.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				E210054329A71D59008B2658 /* Main.storyboard */,
 				E210054829A71D5C008B2658 /* LaunchScreen.storyboard */,
 				E210054629A71D5C008B2658 /* Assets.xcassets */,
+				E210055729A83000008B2658 /* FireParticles.sks */,
 				E210055029A720D9008B2658 /* Sounds */,
 			);
 			path = ShootingGallery;
@@ -148,6 +151,7 @@
 				E210055529A720F4008B2658 /* empty.wav in Resources */,
 				E210055629A720F4008B2658 /* reload.wav in Resources */,
 				E210053C29A71D59008B2658 /* GameScene.sks in Resources */,
+				E210055829A83001008B2658 /* FireParticles.sks in Resources */,
 				E210054729A71D5C008B2658 /* Assets.xcassets in Resources */,
 				E210054A29A71D5C008B2658 /* LaunchScreen.storyboard in Resources */,
 			);
