@@ -16,6 +16,9 @@ class ActionViewController: UIViewController {
     var pageTitle = ""
     var pageURL = ""
 
+    let userDefaultsKey = "scripts"
+    let defaults = UserDefaults.standard
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,6 +41,7 @@ class ActionViewController: UIViewController {
                     // Update view on thread
                     DispatchQueue.main.async {
                         self?.title = self?.pageTitle
+                        self?.script.text = self?.retrieveScripts(at: self?.pageURL)
                     }
                 }
             }
@@ -51,6 +55,22 @@ class ActionViewController: UIViewController {
         let customJavaScript = NSItemProvider(item: webDictionary, typeIdentifier: UTType.propertyList.identifier)
         item.attachments = [customJavaScript]
         extensionContext?.completeRequest(returningItems: [item])
+
+        saveJsToUserDefaults()
+    }
+
+    private func saveJsToUserDefaults() {
+        guard let urlHost = URL(string: pageURL)?.host(), let script = script.text, !script.isEmpty else { return }
+
+        let saveItem = [urlHost: script]
+        defaults.set(saveItem, forKey: userDefaultsKey)
+    }
+
+    private func retrieveScripts(at url: String?) -> String {
+        guard let urlHost = URL(string: pageURL)?.host() else { return "" }
+
+        let savedScripts = defaults.object(forKey: userDefaultsKey) as? [String: String] ?? [String: String]()
+        return savedScripts[urlHost] ?? ""
     }
 
     @objc func addScript() {
