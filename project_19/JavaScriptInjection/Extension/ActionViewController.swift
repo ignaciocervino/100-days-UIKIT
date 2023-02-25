@@ -16,8 +16,8 @@ class ActionViewController: UIViewController {
     var pageTitle = ""
     var pageURL = ""
 
-    let userDefaultsKey = "scripts"
-    let defaults = UserDefaults.standard
+    let defaults: UserDefaultsManaging = UserDefaultsManager()
+    var defaultScriptName = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,10 @@ class ActionViewController: UIViewController {
 
                     // Update view on thread
                     DispatchQueue.main.async {
-                        self?.title = self?.pageTitle
-                        self?.script.text = self?.retrieveScripts(at: self?.pageURL)
+                        guard let self = self else { return }
+
+                        self.title = self.pageTitle
+                        self.script.text = self.defaults.retrieveScript(with: self.defaultScriptName)
                     }
                 }
             }
@@ -49,28 +51,39 @@ class ActionViewController: UIViewController {
     }
 
     @IBAction func done() {
+        askUserScriptName()
+    }
+
+    private func scriptAction() {
         let item = NSExtensionItem()
         let argument: NSDictionary = ["customJavaScript": script.text]
         let webDictionary: NSDictionary = [NSExtensionJavaScriptFinalizeArgumentKey: argument]
         let customJavaScript = NSItemProvider(item: webDictionary, typeIdentifier: UTType.propertyList.identifier)
         item.attachments = [customJavaScript]
         extensionContext?.completeRequest(returningItems: [item])
-
-        saveJsToUserDefaults()
     }
 
-    private func saveJsToUserDefaults() {
-        guard let urlHost = URL(string: pageURL)?.host(), let script = script.text, !script.isEmpty else { return }
+    private func askUserScriptName() {
+        let ac = UIAlertController(title: "Name your script", message: "Write a name for your script", preferredStyle: .alert)
+        ac.addTextField()
 
-        let saveItem = [urlHost: script]
-        defaults.set(saveItem, forKey: userDefaultsKey)
-    }
+        let submitAction = UIAlertAction(title: "Submit", style: .default) { [unowned ac, weak self] _ in
+            let answer = ac.textFields![0]
+            if let answerText = answer.text {
+                if !answerText.isEmpty, answerText != "Empty" {
+                    self?.scriptAction()
+                    self?.defaults.saveJsToUserDefaults(with: answerText, using: self?.script.text)
+                } else {
+                    let ac = UIAlertController(title: "That name is not possible", message: nil, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+                    self?.present(ac, animated: true)
+                }
+            }
+        }
 
-    private func retrieveScripts(at url: String?) -> String {
-        guard let urlHost = URL(string: pageURL)?.host() else { return "" }
-
-        let savedScripts = defaults.object(forKey: userDefaultsKey) as? [String: String] ?? [String: String]()
-        return savedScripts[urlHost] ?? ""
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(submitAction)
+        present(ac, animated: true)
     }
 
     @objc func addScript() {
