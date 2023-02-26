@@ -21,6 +21,9 @@ class GameScene: SKScene {
             scoreLabel.text = "Score: \(score)"
         }
     }
+
+    var launchesCount = 0
+    let allowedLaunches = 5
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "background")
@@ -107,6 +110,8 @@ class GameScene: SKScene {
         default:
             break
         }
+
+        launchesCount += 1
     }
 
     func checkTouches(_ touches: Set<UITouch>) {
@@ -147,6 +152,10 @@ class GameScene: SKScene {
                 fireworks.remove(at: index)
                 firework.removeFromParent()
             }
+        }
+
+        if launchesCount >= allowedLaunches {
+            gameTimer?.invalidate()
         }
     }
 
