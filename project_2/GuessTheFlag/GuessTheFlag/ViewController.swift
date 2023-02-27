@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet var button1: UIButton!
     @IBOutlet var button2: UIButton!
     @IBOutlet var button3: UIButton!
@@ -22,6 +22,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // Local notifications
+        registerLocalNotification()
 
         highScore = defaults.integer(forKey: "Highscore")
 
@@ -102,6 +105,61 @@ class ViewController: UIViewController {
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
 
         present(ac, animated: true)
+    }
+
+    // Local notifications
+    func registerLocalNotification() {
+        let center = UNUserNotificationCenter.current()
+
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            if granted {
+                print("Yay!")
+                self.scheduleLocalNotification()
+            } else {
+                print("D'oh")
+            }
+        }
+    }
+
+    func scheduleLocalNotification() {
+        let center = UNUserNotificationCenter.current()
+        center.delegate = self
+
+        center.removeAllDeliveredNotifications()
+        center.removeAllPendingNotificationRequests()
+
+        // Content to show in the notification
+        let content = UNMutableNotificationContent()
+        content.title = "Come back and play!"
+        content.body = "This is a reminder to play this amazing game!"
+        content.categoryIdentifier = "alarm" // Type of alert
+        content.userInfo = ["customData": "fizzbuzz"] // link notification to app content
+        content.sound = .default
+
+        let play = UNNotificationAction(identifier: "play", title: "Play now", options: .foreground)
+        let category = UNNotificationCategory(identifier: "comeBack", actions: [play], intentIdentifiers: [], options: [])
+        center.setNotificationCategories([category])
+
+        // When to show it
+        var dateComponents = DateComponents()
+        dateComponents.hour = 24
+        // create for an specific date and hour
+        //        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        // Create the request and add it to the notification center
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        center.add(request)
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+
+        if let customData = userInfo["customData"] as? String {
+            print("Custom data received: \(customData)")
+        }
+
+        completionHandler()
     }
 
 }
