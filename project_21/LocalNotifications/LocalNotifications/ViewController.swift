@@ -70,19 +70,24 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
+        var alertTitle = ""
 
         if let customData = userInfo["customData"] as? String {
             print("Custom data received: \(customData)")
             switch response.actionIdentifier {
             case UNNotificationDefaultActionIdentifier:
                 // the user swiped to unlock
-                print("Default identifier")
+                alertTitle = "Default identifier"
             case "show":
-                print("Show more information..")
+                alertTitle = "Show more information.."
             default:
                 break
             }
         }
+
+        let ac = UIAlertController(title: alertTitle, message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+        present(ac,animated: true)
 
         completionHandler()
     }
