@@ -11,6 +11,7 @@ import CoreLocation
 class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var distanceReading: UILabel!
     var locationManager: CLLocationManager?
+    var firstDetected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +52,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             case .immediate:
                 self.view.backgroundColor = .red
                 self.distanceReading.text = "RIGHT THERE"
+                self.firstDetected = true
+                self.showDetectedAlert()
             default:
                 self.view.backgroundColor = .gray
                 self.distanceReading.text = "UNKNOWN"
@@ -63,6 +66,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             update(distance: beacon.proximity)
         } else {
             update(distance: .unknown)
+        }
+    }
+
+    private func showDetectedAlert() {
+        let ac = UIAlertController(title: "The beacon was detected!", message: nil, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+
+        if firstDetected {
+            present(ac, animated: true)
         }
     }
 }
