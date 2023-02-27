@@ -23,13 +23,21 @@ class DetailViewController: UIViewController {
 
     private func addToolBarItems() {
         let delete = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(clearNote))
-        toolbarItems = [delete]
+        let share = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareText))
+        toolbarItems = [delete, share]
         navigationController?.isToolbarHidden = false
     }
 
     @objc private func clearNote() {
         noteTxt.text.removeAll()
         title = "Unknown"
+    }
+
+    @objc private func shareText() {
+        guard let text = noteTxt.text else { return }
+
+        let vc = UIActivityViewController(activityItems: [titleString, text], applicationActivities: [])
+        present(vc, animated: true)
     }
 
     private func updateUI() {
