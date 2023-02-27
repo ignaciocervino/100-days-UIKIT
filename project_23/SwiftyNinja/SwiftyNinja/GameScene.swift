@@ -45,6 +45,19 @@ class GameScene: SKScene {
     var nextSequenceQueued = true
 
     var isGameEnded = false
+
+    // Constants
+    let sliceFuse_x_position = 76
+    let sliceFuse_y_position = 64
+    let randomPosition_from = 64
+    let randomPosition_to = 960
+    let randomPosition_y = -128
+
+    let penguinIndex = 1
+    let bombIndex = 0
+
+    let enemyVelocityConstant = 40
+    let enemyCircleRadiusConstant: CGFloat = 64
     
     override func didMove(to view: SKView) {
         let background = SKSpriteNode(imageNamed: "sliceBackground")
@@ -256,12 +269,12 @@ class GameScene: SKScene {
         var enemyType = Int.random(in: 0...6)
 
         if forceBomb == .never {
-            enemyType = 1
+            enemyType = penguinIndex
         } else if forceBomb == .always {
-            enemyType = 0
+            enemyType = bombIndex
         }
 
-        if enemyType == 0 {
+        if enemyType == bombIndex {
             // bomb code
             enemy = SKSpriteNode()
             enemy.zPosition = 1
@@ -284,7 +297,7 @@ class GameScene: SKScene {
             }
 
             if let emitter = SKEmitterNode(fileNamed: "sliceFuse") {
-                emitter.position = CGPoint(x: 76, y: 64)
+                emitter.position = CGPoint(x: sliceFuse_x_position, y: sliceFuse_y_position)
                 enemy.addChild(emitter)
             }
         } else {
@@ -294,7 +307,7 @@ class GameScene: SKScene {
         }
 
         // position code
-        let randomPosition = CGPoint(x: Int.random(in: 64...960), y: -128)
+        let randomPosition = CGPoint(x: Int.random(in: randomPosition_from...randomPosition_to), y: randomPosition_y)
         enemy.position = randomPosition
 
         let randomAngularVelocity = CGFloat.random(in: -3...3)
@@ -312,8 +325,8 @@ class GameScene: SKScene {
 
         let randomYVelocity = Int.random(in: 24...32)
 
-        enemy.physicsBody = SKPhysicsBody(circleOfRadius: 64)
-        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * 40, dy: randomYVelocity * 40)
+        enemy.physicsBody = SKPhysicsBody(circleOfRadius: enemyCircleRadiusConstant)
+        enemy.physicsBody?.velocity = CGVector(dx: randomXVelocity * enemyVelocityConstant, dy: randomYVelocity * enemyVelocityConstant)
         enemy.physicsBody?.angularVelocity = randomAngularVelocity
         enemy.physicsBody?.collisionBitMask = 0
 
