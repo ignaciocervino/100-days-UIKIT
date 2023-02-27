@@ -55,6 +55,7 @@ class GameScene: SKScene {
 
     let penguinIndex = 1
     let bombIndex = 0
+    let specialCharacterIndex = 6
 
     let enemyVelocityConstant = 40
     let enemyCircleRadiusConstant: CGFloat = 64
@@ -187,6 +188,30 @@ class GameScene: SKScene {
 
                 run(SKAction.playSoundFileNamed("explosion.caf", waitForCompletion: false))
                 endGame(triggeredByBomb: true)
+            } else if node.name == "specialCharacter" {
+                // destroy specialCharacter
+                if let emitter = SKEmitterNode(fileNamed: "sliceHitEnemy") {
+                    emitter.position = node.position
+                    addChild(emitter)
+                }
+
+                node.name = ""
+                node.physicsBody?.isDynamic = false
+
+                let scaleOut = SKAction.scale(by: 0.001, duration: 0.2)
+                let fadeOut = SKAction.fadeOut(withDuration: 0.2)
+                let group = SKAction.group([scaleOut,fadeOut])
+
+                let seq = SKAction.sequence([group, .removeFromParent()]) // run first then remove the node
+                node.run(seq)
+
+                score += 5
+
+                if let index = activeEnemies.firstIndex(of: node) {
+                    activeEnemies.remove(at: index)
+                }
+
+                run(SKAction.playSoundFileNamed("whack.caf", waitForCompletion: false))
             }
         }
     }
@@ -206,6 +231,11 @@ class GameScene: SKScene {
             livesImages[1].texture = SKTexture(imageNamed: "sliceLifeGone")
             livesImages[2].texture = SKTexture(imageNamed: "sliceLifeGone")
         }
+
+        let gameOverNode = SKSpriteNode(imageNamed: "gameOver")
+        gameOverNode.position = CGPoint(x: 512, y: 384)
+        gameOverNode.zPosition = 3
+        addChild(gameOverNode)
     }
 
     func playSwooshSound() {
@@ -300,6 +330,10 @@ class GameScene: SKScene {
                 emitter.position = CGPoint(x: sliceFuse_x_position, y: sliceFuse_y_position)
                 enemy.addChild(emitter)
             }
+        } else if enemyType == specialCharacterIndex {
+            enemy = SKSpriteNode(imageNamed: "temo")
+            run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
+            enemy.name = "specialCharacter"
         } else {
             enemy = SKSpriteNode(imageNamed: "penguin")
             run(SKAction.playSoundFileNamed("launch.caf", waitForCompletion: false))
