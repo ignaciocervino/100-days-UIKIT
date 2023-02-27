@@ -14,7 +14,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         super.viewDidLoad()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Register", style: .plain, target: self, action: #selector(registerLocal))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Schedule", style: .plain, target: self, action: #selector(scheduleLocal(at:)))
 
     }
 
@@ -30,8 +30,10 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         }
     }
 
-    @objc func scheduleLocal() {
-        registerCategories() // So iOS knows inmediatly what alarm means
+    @objc func scheduleLocal(at time: Double = 0) {
+        let timeInterval = time > 0 ? time : 5
+
+        registerCategories() // So iOS knows immediately what alarm means
         let center = UNUserNotificationCenter.current()
         center.removeAllPendingNotificationRequests()
 
@@ -49,7 +51,7 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         dateComponents.minute = 30
         // create for an specific date and hour
 //        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
 
         // Create the request and add it to the notification center
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -60,10 +62,11 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
         let center = UNUserNotificationCenter.current()
         center.delegate = self
 
-        // foreground means when this notification is touch, go to the app inmediatly
+        // foreground means when this notification is touch, go to the app immediately
         let show = UNNotificationAction(identifier: "show", title: "Tell me more", options: .foreground)
+        let remindLater = UNNotificationAction(identifier: "remindLater", title: "Remind me later", options: .foreground)
 
-        let category = UNNotificationCategory(identifier: "alarm", actions: [show], intentIdentifiers: [], options: [])
+        let category = UNNotificationCategory(identifier: "alarm", actions: [show, remindLater], intentIdentifiers: [], options: [])
 
         center.setNotificationCategories([category])
     }
@@ -80,6 +83,9 @@ class ViewController: UIViewController, UNUserNotificationCenterDelegate {
                 alertTitle = "Default identifier"
             case "show":
                 alertTitle = "Show more information.."
+            case "remindLater":
+                alertTitle = "Will remind you again in 24 hours"
+                scheduleLocal(at: 5)
             default:
                 break
             }
