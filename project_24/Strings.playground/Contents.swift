@@ -63,6 +63,14 @@ extension String {
         }
         return true
     }
+
+    // Challenge 3
+    /**
+     Create a String extension that adds a lines property that returns an array of all the lines in a string. So, “this\nis\na\ntest” should return an array with four elements.
+     */
+    var lines: [String] {
+        return self.components(separatedBy: "\n")
+    }
 }
 
 let letter2 = name[3] // this can be doe because of the extension above
@@ -104,3 +112,6 @@ print("pet".withPrefix("car"))
 
 // Challenge 2
 print("123.12".isNumeric)
+
+// Challenge 3
+print("this\nis\na\ntest".lines)
