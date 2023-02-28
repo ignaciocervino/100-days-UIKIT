@@ -48,6 +48,21 @@ extension String {
             return self
         }
     }
+
+    // Challenge 2
+    /**
+     Create a String extension that adds an isNumeric property that returns true if the string holds any sort of number. Tip: creating a Double from a String is a failable initializer.
+     */
+    var isNumeric: Bool {
+        for letter in self {
+            if letter.isNumber || letter == "." {
+                continue
+            } else {
+                return false
+            }
+        }
+        return true
+    }
 }
 
 let letter2 = name[3] // this can be doe because of the extension above
@@ -86,3 +101,6 @@ mutableString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: N
 
 // Challenge 1
 print("pet".withPrefix("car"))
+
+// Challenge 2
+print("123.12".isNumeric)
