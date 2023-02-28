@@ -36,6 +36,18 @@ extension String {
         }
         return false
     }
+
+    // Challenge 1
+    /**
+     Create a String extension that adds a withPrefix() method. If the string already contains the prefix it should return itself; if it doesn’t contain the prefix, it should return itself with the prefix added. For example: "pet".withPrefix("car") should return “carpet”.
+     */
+    func withPrefix(_ prefix: String) -> String {
+        if !self.hasPrefix(prefix) {
+            return prefix + self
+        } else {
+            return self
+        }
+    }
 }
 
 let letter2 = name[3] // this can be doe because of the extension above
@@ -71,3 +83,6 @@ mutableString.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: N
 mutableString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24), range: NSRange(location: 8, length: 1))
 mutableString.addAttribute(.font, value: UIFont.systemFont(ofSize: 32), range: NSRange(location: 10, length: 4))
 mutableString.addAttribute(.font, value: UIFont.systemFont(ofSize: 40), range: NSRange(location: 15, length: 6))
+
+// Challenge 1
+print("pet".withPrefix("car"))
