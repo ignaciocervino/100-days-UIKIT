@@ -141,3 +141,15 @@ view.bounceOut(duration: 5)
 containerView.addSubview(view)
 
 PlaygroundPage.current.liveView = containerView
+
+/** Challenge 2: Extend Int with a times() method that runs a closure as many times as the number is high. For example, 5.times { print("Hello!") } will print “Hello” five times. */
+
+extension Int {
+    func times(_ closure: () -> Void) {
+        for _ in 0 ..< self {
+            closure()
+        }
+    }
+}
+
+5.times { print("Hello!") }
