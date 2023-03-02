@@ -126,6 +126,9 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
             print("Connecting: \(peerID.displayName)")
 
         case .notConnected:
+            let ac = UIAlertController(title: "Connection aborted!", message: "\(peerID.displayName) has disconnected!", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
             print("Not Connected: \(peerID.displayName)")
 
         @unknown default: // For Unknown future cases that are not the 3 above
