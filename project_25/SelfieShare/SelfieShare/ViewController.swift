@@ -21,8 +21,13 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         collectionView.collectionViewLayout = UICollectionViewFlowLayout()
 
         title = "Selfie Share"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+        let connectBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showConnectionPrompt))
+        let whoBtn = UIBarButtonItem(title: "Who", style: .plain, target: self, action: #selector(showConnectedUsers))
+        navigationItem.leftBarButtonItems = [connectBtn, whoBtn]
+
+        let cameraBtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(importPicture))
+        let messageBtn = UIBarButtonItem(title: "Message", style: .plain, target: self, action: #selector(sendMessage))
+        navigationItem.rightBarButtonItems = [messageBtn, cameraBtn]
 
         mcSession = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         mcSession?.delegate = self
@@ -69,6 +74,44 @@ class ViewController: UICollectionViewController, UINavigationControllerDelegate
         ac.addAction(UIAlertAction(title: "Join a session", style: .default, handler: joinSession))
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(ac, animated: true)
+    }
+
+    @objc func showConnectedUsers() {
+        guard let mcSession = mcSession else { return }
+        let ac = UIAlertController(title: "Connected Users", message: nil, preferredStyle: .actionSheet)
+        for user in mcSession.connectedPeers {
+            ac.addAction(UIAlertAction(title: user.displayName, style: .default))
+        }
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(ac, animated: true)
+    }
+
+    @objc func sendMessage() {
+        let ac = UIAlertController(title: "Send a message", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        let sendAction = UIAlertAction(title: "Send", style: .default) {
+            [weak self, weak ac] action in
+            guard let message = ac?.textFields?[0].text else { return }
+            self?.submit(message)
+        }
+        ac.addAction(sendAction)
+        present(ac, animated: true)
+    }
+
+    func submit(_ message: String) {
+        guard let mcSession = mcSession else { return }
+
+        if mcSession.connectedPeers.count > 0 {
+            let data = Data(message.utf8)
+            do {
+                try mcSession.send(data, toPeers: mcSession.connectedPeers, with: .reliable)
+            } catch {
+                let ac = UIAlertController(title: "Send error", message: error.localizedDescription, preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+        }
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
