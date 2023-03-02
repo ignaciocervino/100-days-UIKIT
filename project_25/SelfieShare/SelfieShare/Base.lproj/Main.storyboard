@@ -12,7 +12,7 @@
         <scene sceneID="xog-gW-CfD">
             <objects>
                 <collectionViewController id="Ph4-Kr-i0g" customClass="ViewController" customModule="SelfieShare" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qEK-uH-erX">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" dataMode="prototypes" id="qEK-uH-erX">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -25,20 +25,20 @@
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageView" id="GIy-d4-jaf">
                                 <rect key="frame" x="10" y="10" width="145" height="145"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="tdo-SF-76g">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="tdo-SF-76g">
                                     <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Z-l0-cx9">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q7Z-l0-cx9">
                                             <rect key="frame" x="0.0" y="0.0" width="145" height="145"/>
                                         </imageView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Q7Z-l0-cx9" firstAttribute="leading" secondItem="tdo-SF-76g" secondAttribute="leading" id="fGH-EJ-IgI"/>
-                                        <constraint firstItem="Q7Z-l0-cx9" firstAttribute="centerX" secondItem="tdo-SF-76g" secondAttribute="centerX" id="or0-bj-RLT"/>
-                                        <constraint firstItem="Q7Z-l0-cx9" firstAttribute="top" secondItem="tdo-SF-76g" secondAttribute="top" id="rqD-ow-8Jg"/>
-                                        <constraint firstItem="Q7Z-l0-cx9" firstAttribute="centerY" secondItem="tdo-SF-76g" secondAttribute="centerY" id="uRw-4D-pcw"/>
+                                        <constraint firstAttribute="trailing" secondItem="Q7Z-l0-cx9" secondAttribute="trailing" id="8bI-Dj-8Yx"/>
+                                        <constraint firstAttribute="bottom" secondItem="Q7Z-l0-cx9" secondAttribute="bottom" id="JQY-1N-IUt"/>
+                                        <constraint firstItem="Q7Z-l0-cx9" firstAttribute="top" secondItem="tdo-SF-76g" secondAttribute="top" id="U7M-xn-4Ca"/>
+                                        <constraint firstItem="Q7Z-l0-cx9" firstAttribute="leading" secondItem="tdo-SF-76g" secondAttribute="leading" id="nL9-PZ-fAy"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                             </collectionViewCell>
