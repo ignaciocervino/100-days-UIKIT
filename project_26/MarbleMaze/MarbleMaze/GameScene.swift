@@ -68,7 +68,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return levelString.components(separatedBy: "\n")
     }
 
-    func loadWall() {
+    func loadWall(_ position: CGPoint) {
         let node = SKSpriteNode(imageNamed: "block")
         node.position = position
         node.physicsBody = SKPhysicsBody(rectangleOf: node.size)
@@ -77,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(node)
     }
 
-    func loadVortex() {
+    func loadVortex(_ position: CGPoint) {
         let node = SKSpriteNode(imageNamed: "vortex")
         node.name = "vortex"
         node.position = position
@@ -91,7 +91,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(node)
     }
 
-    func loadStar() {
+    func loadStar(_ position: CGPoint) {
         let node = SKSpriteNode(imageNamed: "star")
         node.name = "star"
         node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
@@ -104,7 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(node)
     }
 
-    func loadFinish() {
+    func loadFinish(_ position: CGPoint) {
         let node = SKSpriteNode(imageNamed: "finish")
         node.name = "finish"
         node.physicsBody = SKPhysicsBody(circleOfRadius: node.size.width / 2)
@@ -125,10 +125,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 let position = CGPoint(x: (64 * column) + 32, y: (64 * row) + 32)
 
                 switch letter {
-                case "x": loadWall()
-                case "v": loadVortex()
-                case "s": loadStar()
-                case "f": loadFinish()
+                case "x": loadWall(position)
+                case "v": loadVortex(position)
+                case "s": loadStar(position)
+                case "f": loadFinish(position)
                 case " ": break
                 default:
                     fatalError("Unknown level letter: \(letter)")
