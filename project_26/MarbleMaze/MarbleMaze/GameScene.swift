@@ -46,7 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.zPosition = 2
         addChild(scoreLabel)
 
-        loadLevel()
+        loadLevel("level1")
         createPlayer()
 
         physicsWorld.gravity = .zero
@@ -56,12 +56,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         motionManager?.startAccelerometerUpdates()
     }
 
-    func getLevelLines() -> [String] {
-        guard let levelURL = Bundle.main.url(forResource: "level1", withExtension: "txt") else {
-            fatalError("Could not find level1.txt in the app bundle.")
+    func getLevelLines(for level: String) -> [String] {
+        guard let levelURL = Bundle.main.url(forResource: level, withExtension: "txt") else {
+            fatalError("Could not find \(level).txt in the app bundle.")
         }
         guard let levelString = try? String(contentsOf: levelURL) else {
-            fatalError("Could not find level1.txt in the app bundle.")
+            fatalError("Could not find \(level).txt in the app bundle.")
 
         }
 
@@ -117,8 +117,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(node)
     }
 
-    func loadLevel() {
-        let lines = getLevelLines()
+    func loadLevel(_ level: String) {
+        let lines = getLevelLines(for: level)
 
         for (row, line) in lines.reversed().enumerated() {
             for (column, letter) in line.enumerated() {
@@ -208,7 +208,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.removeFromParent()
             score += 1
         } else if node.name == "finished" {
-            // next level?
+            loadLevel("level2")
         }
     }
 }

@@ -15,6 +15,7 @@
 		E210069729B14522008B2658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E210069629B14522008B2658 /* Assets.xcassets */; };
 		E210069A29B14522008B2658 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E210069829B14522008B2658 /* LaunchScreen.storyboard */; };
 		E21006A129B145E0008B2658 /* level1.txt in Resources */ = {isa = PBXBuildFile; fileRef = E21006A029B145E0008B2658 /* level1.txt */; };
+		E21006A329B17699008B2658 /* level2.txt in Resources */ = {isa = PBXBuildFile; fileRef = E21006A229B17699008B2658 /* level2.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		E210069629B14522008B2658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E210069929B14522008B2658 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E21006A029B145E0008B2658 /* level1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level1.txt; sourceTree = "<group>"; };
+		E21006A229B17699008B2658 /* level2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = level2.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 				E210069629B14522008B2658 /* Assets.xcassets */,
 				E210069829B14522008B2658 /* LaunchScreen.storyboard */,
 				E21006A029B145E0008B2658 /* level1.txt */,
+				E21006A229B17699008B2658 /* level2.txt */,
 			);
 			path = MarbleMaze;
 			sourceTree = "<group>";
@@ -131,6 +134,7 @@
 			files = (
 				E21006A129B145E0008B2658 /* level1.txt in Resources */,
 				E210069529B1451E008B2658 /* Main.storyboard in Resources */,
+				E21006A329B17699008B2658 /* level2.txt in Resources */,
 				E210068C29B1451E008B2658 /* GameScene.sks in Resources */,
 				E210069729B14522008B2658 /* Assets.xcassets in Resources */,
 				E210069A29B14522008B2658 /* LaunchScreen.storyboard in Resources */,
