@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBAction func redrawTapped(_ sender: Any) {
         currentDrawType += 1
 
-        if currentDrawType > 5 {
+        if currentDrawType > 6 {
             currentDrawType = 0
         }
 
@@ -32,6 +32,7 @@ class ViewController: UIViewController {
         case 3: drawRotatedSquares()
         case 4: drawLines()
         case 5: drawImagesAndText()
+        case 6: drawEmoji()
         default: break
         }
     }
@@ -163,6 +164,38 @@ class ViewController: UIViewController {
 
             let mouse = UIImage(named: "mouse")
             mouse?.draw(at: CGPoint(x: 300, y: 150))
+        }
+
+        imageView.image = image
+    }
+
+    /**
+     Challenge 1: Pick any emoji and try creating it using Core Graphics. You should find some easy enough, but for a harder challenge you could also try something like the star emoji.
+     */
+    func drawEmoji() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+
+        let image = renderer.image { ctx in
+            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512).insetBy(dx: 5, dy: 5)
+            let leftEye = CGRect(x: 175, y: 150, width: 50, height: 80)
+            let rightEye = CGRect(x: 287, y: 150, width: 50, height: 80)
+            let smile = CGRect(x: 231, y: 350, width: 50, height: 50)
+
+            ctx.cgContext.setFillColor(UIColor.yellow.cgColor)
+            ctx.cgContext.addEllipse(in: rectangle)
+            ctx.cgContext.drawPath(using: .fill)
+
+            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+            ctx.cgContext.addEllipse(in: smile)
+            ctx.cgContext.drawPath(using: .fill)
+
+            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+            ctx.cgContext.addEllipse(in: leftEye)
+            ctx.cgContext.drawPath(using: .fill)
+
+            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+            ctx.cgContext.addEllipse(in: rightEye)
+            ctx.cgContext.drawPath(using: .fill)
         }
 
         imageView.image = image
