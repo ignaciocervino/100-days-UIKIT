@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBAction func redrawTapped(_ sender: Any) {
         currentDrawType += 1
 
-        if currentDrawType > 6 {
+        if currentDrawType > 7 {
             currentDrawType = 0
         }
 
@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         case 4: drawLines()
         case 5: drawImagesAndText()
         case 6: drawEmoji()
+        case 7: spellTwin()
         default: break
         }
     }
@@ -196,6 +197,59 @@ class ViewController: UIViewController {
             ctx.cgContext.setFillColor(UIColor.black.cgColor)
             ctx.cgContext.addEllipse(in: rightEye)
             ctx.cgContext.drawPath(using: .fill)
+        }
+
+        imageView.image = image
+    }
+
+    /**
+     Challenge 2: Use a combination of move(to:) and addLine(to:) to create and stroke a path that spells “TWIN” on the canvas.
+     */
+    func spellTwin() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+
+        let image = renderer.image { ctx in
+            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512)
+
+            ctx.cgContext.setStrokeColor(UIColor.white.cgColor)
+            ctx.cgContext.setLineWidth(3)
+
+            let upperY = CGFloat(200)
+            let lowerY = CGFloat(350)
+            let startX = CGFloat(50)
+
+            // draw the T
+            ctx.cgContext.move(to: CGPoint(x: startX, y: upperY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 130, y: upperY))
+            ctx.cgContext.move(to: CGPoint(x: startX + 65, y: upperY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 65, y: lowerY))
+
+            // draw the W
+            ctx.cgContext.move(to: CGPoint(x: startX + 140, y: upperY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 165, y: lowerY))
+            ctx.cgContext.move(to: CGPoint(x: startX + 165, y: lowerY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 180, y: lowerY - 75))
+            ctx.cgContext.move(to: CGPoint(x: startX + 180, y: lowerY - 75))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 205, y: lowerY))
+            ctx.cgContext.move(to: CGPoint(x: startX + 205, y: lowerY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 225, y: upperY))
+
+            // draw the I
+            ctx.cgContext.move(to: CGPoint(x: startX + 255, y: upperY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 255, y: lowerY))
+
+            // draw the N
+            ctx.cgContext.move(to: CGPoint(x: startX + 285, y: lowerY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 285, y: upperY))
+
+            ctx.cgContext.move(to: CGPoint(x: startX + 285, y: upperY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 335, y: lowerY))
+
+            ctx.cgContext.move(to: CGPoint(x: startX + 335, y: upperY))
+            ctx.cgContext.addLine(to: CGPoint(x: startX + 335, y: lowerY))
+
+            ctx.cgContext.addRect(rectangle)
+            ctx.cgContext.drawPath(using: .fillStroke)
         }
 
         imageView.image = image
