@@ -27,6 +27,8 @@ class ViewController: UIViewController {
 
         switch currentDrawType {
         case 0: drawRectangle()
+        case 1: drawCircle()
+        case 2: drawCheckerboard()
         default: break
         }
     }
@@ -48,5 +50,44 @@ class ViewController: UIViewController {
 
         imageView.image = image
     }
+
+    func drawCircle() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+
+        let image = renderer.image { ctx in
+            // draw code here
+            let rectangle = CGRect(x: 0, y: 0, width: 512, height: 512).insetBy(dx: 5, dy: 5) // method that lets us push each edge in by a certain amount.
+
+            ctx.cgContext.setFillColor(UIColor.red.cgColor)
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
+            ctx.cgContext.setLineWidth(10) // center of the edge of the rectangle
+
+            ctx.cgContext.addEllipse(in: rectangle)
+            ctx.cgContext.drawPath(using: .fillStroke)
+        }
+
+        imageView.image = image
+    }
+
+    func drawCheckerboard() {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 512, height: 512))
+
+        let image = renderer.image { ctx in
+            // draw code here
+            ctx.cgContext.setFillColor(UIColor.black.cgColor)
+
+            for row in 0 ..< 8 {
+                for col in 0 ..< 8 {
+                    if (row + col).isMultiple(of: 2) {
+                        // Fill just fills the rectangle at the parameter skipping the draw process
+                        ctx.cgContext.fill(CGRect(x: col * 64, y: row * 64, width: 64, height: 64))
+                    }
+                }
+            }
+        }
+
+        imageView.image = image
+    }
+
 }
 
