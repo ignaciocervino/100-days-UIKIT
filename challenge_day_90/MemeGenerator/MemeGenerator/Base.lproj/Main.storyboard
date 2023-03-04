@@ -17,22 +17,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="PBI-1i-XGI">
+                                <rect key="frame" x="20" y="103" width="353" height="66"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVK-Ve-MOf">
+                                        <rect key="frame" x="0.0" y="0.0" width="156.66666666666666" height="66"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Upper Text"/>
+                                        <connections>
+                                            <action selector="upperBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yjq-kb-oC1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQO-0G-kf7">
+                                        <rect key="frame" x="196.66666666666663" y="0.0" width="156.33333333333337" height="66"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Bottom Text"/>
+                                        <connections>
+                                            <action selector="bottomBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G71-Pj-Uxt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="EVK-Ve-MOf" firstAttribute="width" secondItem="zQO-0G-kf7" secondAttribute="width" id="Jv4-Zt-3Yf"/>
+                                </constraints>
+                            </stackView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ge9-2B-4Ot" userLabel="memeImage">
-                                <rect key="frame" x="0.0" y="269" width="393" height="315"/>
+                                <rect key="frame" x="0.0" y="254" width="393" height="330"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ge9-2B-4Ot" secondAttribute="bottom" constant="234" id="Gxz-lq-oeu"/>
-                            <constraint firstItem="Ge9-2B-4Ot" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="166" id="JW6-4f-sMc"/>
+                            <constraint firstItem="Ge9-2B-4Ot" firstAttribute="top" secondItem="PBI-1i-XGI" secondAttribute="bottom" constant="85" id="JLb-T9-lhC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ge9-2B-4Ot" secondAttribute="trailing" id="K20-2D-pes"/>
+                            <constraint firstItem="PBI-1i-XGI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="LYO-Oa-w7D"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PBI-1i-XGI" secondAttribute="trailing" constant="20" id="MVN-mS-Oja"/>
+                            <constraint firstItem="PBI-1i-XGI" firstAttribute="height" secondItem="Ge9-2B-4Ot" secondAttribute="height" multiplier="0.2" id="NZj-hg-oxt"/>
+                            <constraint firstItem="PBI-1i-XGI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Oiy-LS-5sg"/>
                             <constraint firstItem="Ge9-2B-4Ot" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nuh-6L-gB1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="r1b-Mb-oi8"/>
                     <connections>
+                        <outlet property="bottomBtn" destination="zQO-0G-kf7" id="Zrb-gb-w5w"/>
                         <outlet property="memeImage" destination="Ge9-2B-4Ot" id="0Wf-aa-lwQ"/>
+                        <outlet property="upperBtn" destination="EVK-Ve-MOf" id="Nls-IL-oVJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
