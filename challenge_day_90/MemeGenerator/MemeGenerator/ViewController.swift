@@ -31,6 +31,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let cameraBtn = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(getPicture))
         navigationItem.rightBarButtonItem = cameraBtn
 
+        let shareBtn = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareMeme))
+        navigationItem.leftBarButtonItem = shareBtn
+
         let backgroundColor = UIColor.cyan
         bottomBtn.backgroundColor = backgroundColor
         bottomBtn.setTitle("Bottom Text", for: .highlighted)
@@ -53,6 +56,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomText = nil
         cleanImage = nil
         present(picker, animated: true)
+    }
+
+    @objc private func shareMeme() {
+        guard let image = memeImage.image else {
+            let ac = UIAlertController(title: "There is no image!", message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .cancel))
+            present(ac, animated: true)
+            return
+        }
+
+        let activityController =  UIActivityViewController(activityItems: [image], applicationActivities: [])
+        present(activityController, animated: true)
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
