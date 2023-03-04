@@ -5,26 +5,55 @@
 //  Created by Ignacio Cervino on 13/02/2023.
 //
 
+import LocalAuthentication
 import UIKit
 
 class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var people = [Person]()
     var currentPerson = Person()
+    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
+        navigationItem.leftBarButtonItem?.isHidden = true
 
-        let defaults = UserDefaults.standard
+        authenticate()
 
-        if let savedPeople = defaults.object(forKey: "people") as? Data {
-            let jsonDecoder = JSONDecoder()
 
-            do {
-                people = try jsonDecoder.decode([Person].self, from: savedPeople)
-            } catch {
-                print("Failed to load people.")
+    }
+
+    private func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Identify yourself!"
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { [weak self] success, authenticationError in
+                // so not to block the main thread, UI goes on main
+                DispatchQueue.main.async {
+                    if success {
+                        self?.navigationItem.leftBarButtonItem?.isHidden = false
+                        if let savedPeople = self?.defaults.object(forKey: "people") as? Data {
+                            let jsonDecoder = JSONDecoder()
+
+                            do {
+                                self?.people = try jsonDecoder.decode([Person].self, from: savedPeople)
+                            } catch {
+                                print("Failed to load people.")
+                            }
+                        }
+                    } else {
+                        // error
+                        let ac = UIAlertController(title: "AuthenticationFailed", message: "Your could not be verified, please try again", preferredStyle: .alert)
+                        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                            self?.authenticate()
+                        }))
+                        self?.present(ac, animated: true)
+                    }
+                }
             }
         }
     }

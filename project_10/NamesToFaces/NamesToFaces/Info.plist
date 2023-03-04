@@ -4,6 +4,8 @@
 <dict>
 	<key>NSCameraUsageDescription</key>
 	<string>NamesToFaces requires access to your phone&apos;s camera.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Identify yourself!</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
