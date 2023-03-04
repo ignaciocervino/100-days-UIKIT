@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E20B814829B38E29006171C8 /* KeychainItemAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20B814629B38E28006171C8 /* KeychainItemAccessibility.swift */; };
+		E20B814929B38E29006171C8 /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20B814729B38E29006171C8 /* KeychainWrapper.swift */; };
 		E2E3DFA729B3894E00563172 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFA629B3894E00563172 /* AppDelegate.swift */; };
 		E2E3DFA929B3894E00563172 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFA829B3894E00563172 /* SceneDelegate.swift */; };
 		E2E3DFAB29B3894E00563172 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E3DFAA29B3894E00563172 /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E20B814629B38E28006171C8 /* KeychainItemAccessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainItemAccessibility.swift; sourceTree = "<group>"; };
+		E20B814729B38E29006171C8 /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		E2E3DFA329B3894E00563172 /* SecretSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecretSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E3DFA629B3894E00563172 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2E3DFA829B3894E00563172 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +67,8 @@
 				E2E3DFAF29B3895200563172 /* Assets.xcassets */,
 				E2E3DFB129B3895200563172 /* LaunchScreen.storyboard */,
 				E2E3DFB429B3895200563172 /* Info.plist */,
+				E20B814629B38E28006171C8 /* KeychainItemAccessibility.swift */,
+				E20B814729B38E29006171C8 /* KeychainWrapper.swift */,
 			);
 			path = SecretSwift;
 			sourceTree = "<group>";
@@ -139,8 +145,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2E3DFAB29B3894E00563172 /* ViewController.swift in Sources */,
+				E20B814829B38E29006171C8 /* KeychainItemAccessibility.swift in Sources */,
 				E2E3DFA729B3894E00563172 /* AppDelegate.swift in Sources */,
 				E2E3DFA929B3894E00563172 /* SceneDelegate.swift in Sources */,
+				E20B814929B38E29006171C8 /* KeychainWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

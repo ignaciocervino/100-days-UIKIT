@@ -48,7 +48,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="VrP-LY-ejS"/>
                     <connections>
-                        <outlet property="textView" destination="OFd-4U-1lw" id="Obw-Tg-i7d"/>
+                        <outlet property="secret" destination="OFd-4U-1lw" id="hmP-eA-rJl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
