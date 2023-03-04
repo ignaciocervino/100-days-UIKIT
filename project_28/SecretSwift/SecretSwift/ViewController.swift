@@ -16,11 +16,19 @@ class ViewController: UIViewController {
 
         title = "Nothing to see here"
 
+        let lock = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(lockApp))
+        navigationItem.rightBarButtonItem = lock
+        navigationItem.rightBarButtonItem?.isHidden = true
+
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
         notificationCenter.addObserver(self, selector: #selector(saveSecretMessage), name: UIApplication.willResignActiveNotification, object: nil)
+    }
+
+    @objc private func lockApp() {
+        saveSecretMessage()
     }
 
     @IBAction func authenticateTapped(_ sender: Any) {
@@ -34,6 +42,7 @@ class ViewController: UIViewController {
                 // so not to block the main thread, UI goes on main
                 DispatchQueue.main.async {
                     if success {
+                        self?.navigationItem.rightBarButtonItem?.isHidden = false
                         self?.unlockSecretMessage()
                     } else {
                         // error
@@ -83,6 +92,7 @@ class ViewController: UIViewController {
         secret.resignFirstResponder()
         secret.isHidden = true
         title = "Nothing to see here"
+        navigationItem.rightBarButtonItem?.isHidden = true
     }
 }
 
