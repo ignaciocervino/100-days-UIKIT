@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var secret: UITextView!
+    let password = "unlock"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +55,23 @@ class ViewController: UIViewController {
             }
         } else {
             // no biometry
-            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
+//            let ac = UIAlertController(title: "Biometry unavailable", message: "Your device is not configured for biometric authentication", preferredStyle: .alert)
+//            ac.addAction(UIAlertAction(title: "OK", style: .default))
+//            present(ac, animated: true)
+
+            let ac = UIAlertController(title: "Enter your password", message: nil, preferredStyle: .alert)
+            ac.addTextField()
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+                guard let password = ac.textFields?[0].text else { return }
+                if password == "unlock" {
+                    self?.navigationItem.rightBarButtonItem?.isHidden = false
+                    self?.unlockSecretMessage()
+                } else {
+                    let ac = UIAlertController(title: "Wrong password", message: nil, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .default))
+                    self?.present(ac, animated: true)
+                }
+            }))
             present(ac, animated: true)
         }
     }
