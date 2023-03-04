@@ -51,35 +51,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.delegate = self
         topText = nil
         bottomText = nil
+        cleanImage = nil
         present(picker, animated: true)
     }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.editedImage] as? UIImage else { return }
         cleanImage = image
+        memeImage.image = image
         dismiss(animated: true)
 
-        let ac = UIAlertController(title: "Top text", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        ac.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] _ in
-            if let text = ac.textFields?[0].text, !text.isEmpty {
-                self?.topText = text.uppercased()
-            }
-            self?.bottomTextAlert(image: image)
-        }))
-        present(ac, animated: true)
-    }
-
-    private func bottomTextAlert(image: UIImage) {
-        let ac = UIAlertController(title: "Bottom text", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        ac.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] _ in
-            if let text = ac.textFields?[0].text, !text.isEmpty {
-                self?.bottomText = text.uppercased()
-            }
-            self?.memeImage.image = self?.addTextToImage(image) ?? image
-        }))
-        present(ac, animated: true)
+        askText(textType: .top, presentSecond: true)
     }
 
     private func addTextToImage(_ image: UIImage?) -> UIImage? {
@@ -123,18 +105,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         askText(textType: .top)
     }
 
-    private func askText(textType: TextType) {
-        let ac = UIAlertController(title: "Add new text", message: nil, preferredStyle: .alert)
+    private func askText(textType: TextType, presentSecond: Bool = false) {
+        let ac = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         ac.addTextField()
 
         if textType == .top {
+            ac.title = "Top text"
             ac.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] _ in
                 if let text = ac.textFields?[0].text, !text.isEmpty {
                     self?.topText = text.uppercased()
                 }
                 self?.memeImage.image = self?.addTextToImage(self?.cleanImage)
+                if presentSecond {
+                    self?.askText(textType: .bottom)
+                }
             }))
         } else if textType == .bottom {
+            ac.title = "Bottom text"
             ac.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak self] _ in
                 if let text = ac.textFields?[0].text, !text.isEmpty {
                     self?.bottomText = text.uppercased()
