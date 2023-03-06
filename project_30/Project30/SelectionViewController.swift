@@ -10,7 +10,6 @@ import UIKit
 
 class SelectionViewController: UITableViewController {
 	var items = [String]() // this is the array that will store the filenames to load
-	var viewControllers = [UIViewController]() // create a cache of the detail view controllers for faster loading
 	var dirty = false
 
     override func viewDidLoad() {
@@ -20,6 +19,7 @@ class SelectionViewController: UITableViewController {
 
 		tableView.rowHeight = 90
 		tableView.separatorStyle = .none
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
 		// load all the JPEGs into our array
 		let fm = FileManager.default
@@ -56,7 +56,7 @@ class SelectionViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = UITableViewCell(style: .default, reuseIdentifier: "Cell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
 		// find the image for this cell, and load its thumbnail
 		let currentImage = items[indexPath.row % items.count]
@@ -99,7 +99,6 @@ class SelectionViewController: UITableViewController {
 		dirty = false
 
 		// add to our view controller cache and show
-		viewControllers.append(vc)
 		navigationController!.pushViewController(vc, animated: true)
 	}
 }
