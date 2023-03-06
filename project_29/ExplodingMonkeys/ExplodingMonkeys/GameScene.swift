@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     var scorePlayer1: SKLabelNode!
     var scorePlayer2: SKLabelNode!
+    var wind: SKLabelNode!
 
     var score1 = 0 {
         didSet {
@@ -44,8 +45,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         createBuildings()
         createPlayers()
         createScores()
+        addRandomWind()
 
         physicsWorld.contactDelegate = self
+    }
+
+    func addRandomWind() {
+        wind = SKLabelNode(fontNamed: "Helvetica")
+        wind.fontSize = 18
+        wind.horizontalAlignmentMode = .center
+        wind.position = CGPoint(x: size.width - 400, y: size.height - 125)
+        wind.zPosition = 5
+        let windValue = Int.random(in: -5...5)
+        let windDirection = CGVector(dx: windValue, dy: 0)
+        physicsWorld.gravity = physicsWorld.gravity + windDirection
+
+        if windValue > 0 {
+            wind.text = "P1 downwind"
+        } else {
+            wind.text = "P2 downwind"
+        }
+        addChild(wind)
     }
 
     func createScores() {
@@ -276,5 +296,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.speed = 0
         isUserInteractionEnabled = false
 
+    }
+}
+
+extension CGVector {
+    static func + (lhs: CGVector, rhs: CGVector) -> CGVector {
+        return CGVector(dx: lhs.dx + rhs.dx, dy: lhs.dy + rhs.dy)
     }
 }
