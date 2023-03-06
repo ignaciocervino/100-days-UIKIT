@@ -9,11 +9,11 @@
 import UIKit
 
 class ImageViewController: UIViewController {
-	weak var owner: SelectionViewController!
-	var image: String!
-	var animTimer: Timer!
+    weak var owner: SelectionViewController? = nil
+	var image: String?
+	var animTimer: Timer?
 
-	var imageView: UIImageView!
+	var imageView: UIImageView = UIImageView()
 
 	override func loadView() {
 		super.loadView()
@@ -21,7 +21,6 @@ class ImageViewController: UIViewController {
 		view.backgroundColor = UIColor.black
 
 		// create an image view that fills the screen
-		imageView = UIImageView()
 		imageView.contentMode = .scaleAspectFit
 		imageView.translatesAutoresizingMaskIntoConstraints = false
 		imageView.alpha = 0
@@ -48,9 +47,10 @@ class ImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		title = image.replacingOccurrences(of: "-Large.jpg", with: "")
-        let path = Bundle.main.path(forResource: image, ofType: nil)!
-		let original = UIImage(contentsOfFile: path)!
+		title = image?.replacingOccurrences(of: "-Large.jpg", with: "")
+        guard let path = Bundle.main.path(forResource: image, ofType: nil), let original = UIImage(contentsOfFile: path) else {
+            return
+        }
 
 		let renderer = UIGraphicsImageRenderer(size: original.size)
 
@@ -76,10 +76,11 @@ class ImageViewController: UIViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        animTimer.invalidate() // destroy the timer
+        animTimer?.invalidate() // destroy the timer
     }
 
 	override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let image else { return }
 		let defaults = UserDefaults.standard
 		var currentVal = defaults.integer(forKey: image)
 		currentVal += 1
@@ -87,6 +88,6 @@ class ImageViewController: UIViewController {
 		defaults.set(currentVal, forKey:image)
 
 		// tell the parent view controller that it should refresh its table counters when we go back
-		owner.dirty = true
+		owner?.dirty = true
 	}
 }

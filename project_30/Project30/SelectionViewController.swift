@@ -23,8 +23,8 @@ class SelectionViewController: UITableViewController {
 
 		// load all the JPEGs into our array
 		let fm = FileManager.default
-
-		if let tempItems = try? fm.contentsOfDirectory(atPath: Bundle.main.resourcePath!) {
+        guard let path = Bundle.main.resourcePath else { return }
+		if let tempItems = try? fm.contentsOfDirectory(atPath: path) {
 			for item in tempItems {
 				if item.range(of: "Large") != nil {
 					items.append(item)
@@ -57,12 +57,14 @@ class SelectionViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        var original: UIImage?
 
 		// find the image for this cell, and load its thumbnail
 		let currentImage = items[indexPath.row % items.count]
 		let imageRootName = currentImage.replacingOccurrences(of: "Large", with: "Thumb")
-		let path = Bundle.main.path(forResource: imageRootName, ofType: nil)!
-		let original = UIImage(contentsOfFile: path)!
+        if let path = Bundle.main.path(forResource: imageRootName, ofType: nil) {
+            original = UIImage(contentsOfFile: path)
+        }
 
         let renderRect = CGRect(origin: .zero, size: CGSize(width: 90, height: 90))
 		let renderer = UIGraphicsImageRenderer(size: renderRect.size)
@@ -71,7 +73,7 @@ class SelectionViewController: UITableViewController {
 			ctx.cgContext.addEllipse(in: renderRect)
 			ctx.cgContext.clip()
 
-			original.draw(in: renderRect)
+			original?.draw(in: renderRect)
 		}
 
 		cell.imageView?.image = rounded
@@ -99,6 +101,6 @@ class SelectionViewController: UITableViewController {
 		dirty = false
 
 		// add to our view controller cache and show
-		navigationController!.pushViewController(vc, animated: true)
+		navigationController?.pushViewController(vc, animated: true)
 	}
 }
