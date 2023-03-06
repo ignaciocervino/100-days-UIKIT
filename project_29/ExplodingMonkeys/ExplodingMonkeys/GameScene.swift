@@ -22,14 +22,49 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var player2: SKSpriteNode!
     var banana: SKSpriteNode!
 
+    var scorePlayer1: SKLabelNode!
+    var scorePlayer2: SKLabelNode!
+
+    var score1 = 0 {
+        didSet {
+            scorePlayer1.text = "Score P1: \(score1)"
+        }
+    }
+    var score2 = 0 {
+        didSet {
+            scorePlayer2.text = "Score P2: \(score2)"
+        }
+    }
+
     var currentPlayer = 1
+    var gameOver = false
     
     override func didMove(to view: SKView) {
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
         createPlayers()
+        createScores()
 
         physicsWorld.contactDelegate = self
+    }
+
+    func createScores() {
+        scorePlayer1 = SKLabelNode(fontNamed: "Chalkduster")
+        scorePlayer1.fontSize = 24
+        scorePlayer1.text = "Score P1: \(score1)"
+        scorePlayer1.horizontalAlignmentMode = .left
+        scorePlayer1.position = CGPoint(x: 20, y: self.size.height - 100)
+        scorePlayer1.zPosition = 5
+
+        scorePlayer2 = SKLabelNode(fontNamed: "Chalkduster")
+        scorePlayer2.fontSize = 24
+        scorePlayer2.text = "Score P2: \(score2)"
+        scorePlayer2.horizontalAlignmentMode = .right
+        scorePlayer2.position = CGPoint(x: self.size.width - 20, y: self.size.height - 100)
+        scorePlayer2.zPosition = 5
+
+        addChild(scorePlayer1)
+        addChild(scorePlayer2)
     }
 
     func createBuildings() {
@@ -68,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(banana)
 
         if currentPlayer == 1 {
-            banana.position = CGPoint(x: player1.position.x - 30, y: player1.position.y - 40)
+            banana.position = CGPoint(x: player1.position.x - 30, y: player1.position.y + 40)
             banana.physicsBody?.angularVelocity = -20
 
             let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player1Throw"))
@@ -104,7 +139,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player1.physicsBody?.isDynamic = false
 
         let player1Building = buildings[1]
-        player1.position = CGPoint(x: player1Building.position.x, y: player1Building.position.y + ((player1Building.size.height + player1.size.height / 2)))
+        player1.position = CGPoint(x: player1Building.position.x, y: player1Building.position.y + ((player1Building.size.height + player1.size.height) / 2))
         addChild(player1)
 
         player2 = SKSpriteNode(imageNamed: "player")
@@ -144,10 +179,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if firstNode.name == "banana" && secondNode.name == "player1" {
+            score2 += 1
+
+            if score2 >= 3 {
+                gameOver(winner: 2)
+            }
             destroy(player: player1)
         }
 
         if firstNode.name == "banana" && secondNode.name == "player2" {
+            score1 += 1
+
+            if score1 >= 3 {
+                gameOver(winner: 2)
+            }
             destroy(player: player2)
         }
     }
@@ -161,16 +206,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player.removeFromParent()
         banana.removeFromParent()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let newGame = GameScene(size: self.size)
-            newGame.viewController = self.viewController
-            self.viewController?.currentGame = newGame
+        if !gameOver {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                let newGame = GameScene(size: self.size)
+                newGame.viewController = self.viewController
+                self.viewController?.currentGame = newGame
 
-            self.changePlayer()
-            newGame.currentPlayer = self.currentPlayer
+                self.changePlayer()
+                newGame.currentPlayer = self.currentPlayer
 
-            let transition = SKTransition.doorway(withDuration: 1.5)
-            self.view?.presentScene(newGame, transition: transition)
+                let transition = SKTransition.doorway(withDuration: 1.5)
+                self.view?.presentScene(newGame, transition: transition)
+            }
         }
     }
 
@@ -209,5 +256,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             banana = nil
             changePlayer()
         }
+    }
+
+    func gameOver(winner: Int) {
+        gameOver = true
+        let gameOver = SKSpriteNode(imageNamed: "gameOver")
+        gameOver.position = CGPoint(x: 512, y: 384)
+        gameOver.zPosition = 10
+        addChild(gameOver)
+        run(SKAction.playSoundFileNamed("gameOver.m4a", waitForCompletion: false))
+        let finalScoreLabel = SKLabelNode(fontNamed: "Chalkduster")
+        finalScoreLabel.text = "Player \(winner) wins!"
+        finalScoreLabel.zPosition = 10
+        finalScoreLabel.position = CGPoint(x: 512, y: 480)
+        finalScoreLabel.horizontalAlignmentMode = .center
+        finalScoreLabel.fontSize = 48
+        addChild(finalScoreLabel)
+
+        physicsWorld.speed = 0
+        isUserInteractionEnabled = false
+
     }
 }
