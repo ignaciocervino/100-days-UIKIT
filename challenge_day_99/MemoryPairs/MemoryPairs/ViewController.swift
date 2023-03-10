@@ -8,12 +8,13 @@
 import UIKit
 
 class ViewController: UICollectionViewController {
-    var items = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    var items = ["1", "2", "3", "4", "5", "6", "7", "8"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionView.collectionViewLayout = CollectionViewLayout()
+        let collectionViewLayout = CollectionViewLayout()
+        collectionViewLayout.numberOfItemsPerRow = 4
+        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     }
