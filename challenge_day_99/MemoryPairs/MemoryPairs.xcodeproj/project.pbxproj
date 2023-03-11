@@ -15,6 +15,8 @@
 		E2C85FE329BA09AC00FD3969 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2C85FE129BA09AC00FD3969 /* LaunchScreen.storyboard */; };
 		E2C85FEB29BBB65B00FD3969 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C85FEA29BBB65B00FD3969 /* CardCell.swift */; };
 		E2C85FED29BBBA2800FD3969 /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C85FEC29BBBA2800FD3969 /* CollectionViewLayout.swift */; };
+		E2C85FF029BCECFA00FD3969 /* CountriesInfo.json in Resources */ = {isa = PBXBuildFile; fileRef = E2C85FEF29BCECFA00FD3969 /* CountriesInfo.json */; };
+		E2C85FF229BCEFDD00FD3969 /* CountryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C85FF129BCEFDD00FD3969 /* CountryData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		E2C85FE429BA09AC00FD3969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2C85FEA29BBB65B00FD3969 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		E2C85FEC29BBBA2800FD3969 /* CollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
+		E2C85FEF29BCECFA00FD3969 /* CountriesInfo.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CountriesInfo.json; sourceTree = "<group>"; };
+		E2C85FF129BCEFDD00FD3969 /* CountryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				E2C85FD629BA09A800FD3969 /* AppDelegate.swift */,
 				E2C85FD829BA09A800FD3969 /* SceneDelegate.swift */,
 				E2C85FDA29BA09A800FD3969 /* ViewController.swift */,
+				E2C85FEF29BCECFA00FD3969 /* CountriesInfo.json */,
+				E2C85FF129BCEFDD00FD3969 /* CountryData.swift */,
 				E2C85FEC29BBBA2800FD3969 /* CollectionViewLayout.swift */,
 				E2C85FDC29BA09A800FD3969 /* Main.storyboard */,
 				E2C85FEA29BBB65B00FD3969 /* CardCell.swift */,
@@ -132,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E2C85FE329BA09AC00FD3969 /* LaunchScreen.storyboard in Resources */,
+				E2C85FF029BCECFA00FD3969 /* CountriesInfo.json in Resources */,
 				E2C85FE029BA09AC00FD3969 /* Assets.xcassets in Resources */,
 				E2C85FDE29BA09A800FD3969 /* Main.storyboard in Resources */,
 			);
@@ -148,6 +155,7 @@
 				E2C85FD729BA09A800FD3969 /* AppDelegate.swift in Sources */,
 				E2C85FD929BA09A800FD3969 /* SceneDelegate.swift in Sources */,
 				E2C85FEB29BBB65B00FD3969 /* CardCell.swift in Sources */,
+				E2C85FF229BCEFDD00FD3969 /* CountryData.swift in Sources */,
 				E2C85FED29BBBA2800FD3969 /* CollectionViewLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

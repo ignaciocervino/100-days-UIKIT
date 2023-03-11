@@ -20,6 +20,5 @@ class CardCell: UICollectionViewCell {
         cardView.layer.borderColor = UIColor.lightGray.cgColor
 
         cardLabel.textColor = UIColor.black
-        cardLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     }
 }

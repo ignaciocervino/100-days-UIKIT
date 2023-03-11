@@ -30,20 +30,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-ze-0Ok">
-                                            <rect key="frame" x="4.3333333333333321" y="14.999999999999998" width="41.333333333333343" height="20.333333333333329"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-ze-0Ok">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="vN8-rp-7tu" secondAttribute="trailing" id="2km-g7-kSD"/>
-                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="centerX" secondItem="vN8-rp-7tu" secondAttribute="centerX" id="DP5-6J-5f3"/>
-                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="centerY" secondItem="vN8-rp-7tu" secondAttribute="centerY" id="Kek-gL-vhl"/>
+                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="top" secondItem="X1P-Dx-7DS" secondAttribute="top" id="EeL-5Z-WfI"/>
+                                        <constraint firstAttribute="trailing" secondItem="dfs-ze-0Ok" secondAttribute="trailing" id="WBq-FG-S2G"/>
                                         <constraint firstAttribute="bottom" secondItem="vN8-rp-7tu" secondAttribute="bottom" id="Xc8-px-Ux7"/>
                                         <constraint firstItem="vN8-rp-7tu" firstAttribute="top" secondItem="X1P-Dx-7DS" secondAttribute="top" id="a39-jX-18I"/>
+                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="leading" secondItem="X1P-Dx-7DS" secondAttribute="leading" id="gzx-Hx-3Zj"/>
                                         <constraint firstItem="vN8-rp-7tu" firstAttribute="leading" secondItem="X1P-Dx-7DS" secondAttribute="leading" id="jqR-R0-S1p"/>
+                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="height" secondItem="X1P-Dx-7DS" secondAttribute="height" id="s5g-xw-COU"/>
+                                        <constraint firstAttribute="bottom" secondItem="dfs-ze-0Ok" secondAttribute="bottom" id="wtK-ae-UFr"/>
                                     </constraints>
                                 </collectionViewCellContentView>
                                 <connections>
