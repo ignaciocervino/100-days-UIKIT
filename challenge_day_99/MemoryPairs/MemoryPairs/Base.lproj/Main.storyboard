@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="a8Z-2E-ds7">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="J7p-zq-Q3C">
+            <objects>
+                <collectionViewController id="Hfz-me-ZuT" customClass="ViewController" customModule="MemoryPairs" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="Sex-h5-Kg9">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <collectionViewLayout key="collectionViewLayout" id="hgj-LO-nDr" customClass="CollectionViewLayout" customModule="MemoryPairs" customModuleProvider="target"/>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cardCell" id="l0O-7V-htX" customClass="CardCell" customModule="MemoryPairs" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="X1P-Dx-7DS">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vN8-rp-7tu">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="249" verticalHuggingPriority="249" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfs-ze-0Ok">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="vN8-rp-7tu" secondAttribute="trailing" id="2km-g7-kSD"/>
+                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="top" secondItem="X1P-Dx-7DS" secondAttribute="top" id="EeL-5Z-WfI"/>
+                                        <constraint firstAttribute="trailing" secondItem="dfs-ze-0Ok" secondAttribute="trailing" id="WBq-FG-S2G"/>
+                                        <constraint firstAttribute="bottom" secondItem="vN8-rp-7tu" secondAttribute="bottom" id="Xc8-px-Ux7"/>
+                                        <constraint firstItem="vN8-rp-7tu" firstAttribute="top" secondItem="X1P-Dx-7DS" secondAttribute="top" id="a39-jX-18I"/>
+                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="leading" secondItem="X1P-Dx-7DS" secondAttribute="leading" id="gzx-Hx-3Zj"/>
+                                        <constraint firstItem="vN8-rp-7tu" firstAttribute="leading" secondItem="X1P-Dx-7DS" secondAttribute="leading" id="jqR-R0-S1p"/>
+                                        <constraint firstItem="dfs-ze-0Ok" firstAttribute="height" secondItem="X1P-Dx-7DS" secondAttribute="height" id="s5g-xw-COU"/>
+                                        <constraint firstAttribute="bottom" secondItem="dfs-ze-0Ok" secondAttribute="bottom" id="wtK-ae-UFr"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="cardLabel" destination="dfs-ze-0Ok" id="YMY-vg-baq"/>
+                                    <outlet property="cardView" destination="vN8-rp-7tu" id="uCH-3u-Axw"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Hfz-me-ZuT" id="yF8-ve-JEF"/>
+                            <outlet property="delegate" destination="Hfz-me-ZuT" id="ddm-1d-I3Z"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="tXe-sH-PbH"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lOG-Nd-pwc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="841.9847328244274" y="8.4507042253521139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sjY-z9-G6T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a8Z-2E-ds7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cCT-C2-ZR3">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Hfz-me-ZuT" kind="relationship" relationship="rootViewController" id="FXE-dE-Wt1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jUI-WV-VpH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-84.732824427480907" y="8.4507042253521139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
