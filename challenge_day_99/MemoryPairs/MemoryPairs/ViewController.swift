@@ -10,7 +10,7 @@ import UIKit
 typealias CountriesInfo = [String: String]
 
 class ViewController: UICollectionViewController {
-    var countriesInfoTuple: [(String, String)]? = [] // store all the data
+    var countriesInfoTuple: [(String, String)] = [] // store all the data
     var currentLevelTuple: [(String, String)] = []
     var randomLevelInfo: [String] = [] // current level countries/codes
     var gameRows = 2 // start with 2x2 game
@@ -20,6 +20,13 @@ class ViewController: UICollectionViewController {
 
     var selectedItem: Int = 0
 
+    var levelOver: Bool = false
+    var levelMatchScore = 0 {
+        didSet {
+            checkEndLevel()
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,7 +35,6 @@ class ViewController: UICollectionViewController {
             switch result {
             case .success(let decodedDictionary):
                 self?.countriesInfoTuple = decodedDictionary.map { ($0, $1) }
-                self?.countriesInfoTuple?.shuffle()
                 self?.setupGameArray()
                 self?.collectionView.reloadData()
 
@@ -39,10 +45,48 @@ class ViewController: UICollectionViewController {
 
     }
 
-    private func setupGameArray() {
-        guard let countriesInfoTuple else { return }
+    private func checkEndLevel() {
+        let ac = UIAlertController(title: "You won level 1 !!", message: "Lets go to the next one", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Next level", style: .default) { [weak self] _ in
+            self?.playNextLevel()
+        })
+        if levelMatchScore == currentLevelTuple.count {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                self?.present(ac, animated: true)
+            }
+        }
+    }
 
-        currentLevelTuple = Array(countriesInfoTuple.prefix(gameRows))
+    private func playNextLevel() {
+        // Delete the matched pairs
+        collectionView.deleteItems(at: matchedPairs)
+
+        // Reset variables
+        levelMatchScore = 0
+        selectedItem = 0
+        randomLevelInfo.removeAll()
+        currentLevelTuple.removeAll()
+        matchedPairs.removeAll()
+        shouldMatchValue = ""
+
+        // Increase the number of rows
+        gameRows += 2
+
+        // Generate a new game array
+        setupGameArray()
+
+        // Update the collection view layout
+        setupCollectionViewLayout()
+
+        // Reload the collection view data
+        UIView.transition(with: collectionView, duration: 0.7, options: .transitionCrossDissolve, animations: {
+            self.collectionView.reloadData()
+        }, completion: nil)
+    }
+
+    private func setupGameArray() {
+        countriesInfoTuple.shuffle()
+        currentLevelTuple = Array(countriesInfoTuple.prefix((gameRows * gameRows) / 2))
 
         randomLevelInfo = currentLevelTuple.flatMap { [$0.0, $0.1] }
 
@@ -58,11 +102,12 @@ class ViewController: UICollectionViewController {
     }
 
     private func setupCollectionViewLayout() {
-        let collectionViewLayout = CollectionViewLayout()
-        collectionViewLayout.numberOfItemsPerRow = CGFloat(gameRows)
-        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+        let collectionViewLayout = CollectionViewLayout()
+        collectionViewLayout.numberOfItemsPerRow = CGFloat(gameRows)
+//        collectionView.collectionViewLayout = collectionViewLayout
+        collectionView.setCollectionViewLayout(collectionViewLayout, animated: true)
     }
 
     func loadCountriesInfoFromFile(named filename: String, bundle: Bundle = .main, completion: @escaping (Result<CountriesInfo, Error>) -> Void) {
@@ -100,7 +145,7 @@ class ViewController: UICollectionViewController {
             fatalError("Unable to dequeue CardCell")
         }
 
-        guard !randomLevelInfo.isEmpty else { return cell}
+        guard !randomLevelInfo.isEmpty, indexPath.row < randomLevelInfo.count else { return cell}
 
         cell.cardLabel.text = randomLevelInfo[indexPath.row]
         cell.cardView.backgroundColor = .gray
@@ -133,6 +178,7 @@ class ViewController: UICollectionViewController {
                     cell.cardView.backgroundColor = .green
                     lastCell.cardView.backgroundColor = .green
                     collectionView.isUserInteractionEnabled = true
+                    self.levelMatchScore += 1
                 }
             } else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
