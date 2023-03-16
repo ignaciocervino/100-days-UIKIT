@@ -206,4 +206,3 @@ class ViewController: UICollectionViewController {
         return ""
     }
 }
-
