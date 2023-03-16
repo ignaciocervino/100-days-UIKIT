@@ -13,7 +13,8 @@ class ViewController: UICollectionViewController {
     var countriesInfoTuple: [(String, String)] = [] // store all the data
     var currentLevelTuple: [(String, String)] = []
     var randomLevelInfo: [String] = [] // current level countries/codes
-    var gameRows = 2 // start with 2x2 game
+    var gameRows = [2,2,2,2,4,4,4,4,4,4,6,6,6,6,6]
+    var gameRowsIndex = 0
 
     var matchedPairs: [IndexPath] = [] // Define the matchedPairs array
     var shouldMatchValue: String = ""
@@ -70,7 +71,7 @@ class ViewController: UICollectionViewController {
         shouldMatchValue = ""
 
         // Increase the number of rows
-        gameRows += 2
+        gameRowsIndex += 1
 
         // Generate a new game array
         setupGameArray()
@@ -86,7 +87,7 @@ class ViewController: UICollectionViewController {
 
     private func setupGameArray() {
         countriesInfoTuple.shuffle()
-        currentLevelTuple = Array(countriesInfoTuple.prefix((gameRows * gameRows) / 2))
+        currentLevelTuple = Array(countriesInfoTuple.prefix((gameRows[gameRowsIndex] * gameRows[gameRowsIndex]) / 2))
 
         randomLevelInfo = currentLevelTuple.flatMap { [$0.0, $0.1] }
 
@@ -105,7 +106,7 @@ class ViewController: UICollectionViewController {
         collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         let collectionViewLayout = CollectionViewLayout()
-        collectionViewLayout.numberOfItemsPerRow = CGFloat(gameRows)
+        collectionViewLayout.numberOfItemsPerRow = CGFloat(gameRows[gameRowsIndex])
 //        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.setCollectionViewLayout(collectionViewLayout, animated: true)
     }
@@ -137,7 +138,7 @@ class ViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return gameRows * gameRows
+        return gameRows[gameRowsIndex] * gameRows[gameRowsIndex]
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
