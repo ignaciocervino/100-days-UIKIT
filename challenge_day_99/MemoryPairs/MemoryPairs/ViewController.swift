@@ -21,7 +21,8 @@ class ViewController: UICollectionViewController {
 
     var selectedItem: Int = 0
 
-    var levelOver: Bool = false
+    var gameOver: Bool = false
+    var gameScore: Int = 0
     var levelMatchScore = 0 {
         didSet {
             checkEndLevel()
@@ -47,15 +48,47 @@ class ViewController: UICollectionViewController {
     }
 
     private func checkEndLevel() {
-        let ac = UIAlertController(title: "You won level 1 !!", message: "Lets go to the next one", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Next level", style: .default) { [weak self] _ in
-            self?.playNextLevel()
+        if gameRowsIndex == gameRows.count - 1 {
+            gameOver = true
+        }
+        
+        let ac = UIAlertController(title: "You won level \(gameRowsIndex + 1) !!", message: "Lets go to the next one", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Next level", style: .default) { _ in
+            if !self.gameOver {
+                // Increase the number of rows
+                self.gameRowsIndex += 1
+                self.playNextLevel()
+            } else {
+                self.resetGame()
+            }
         })
         if levelMatchScore == currentLevelTuple.count {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                 self?.present(ac, animated: true)
             }
         }
+    }
+    
+    private func resetGame() {
+        let ac = UIAlertController(title: "Congratulations!", message: "You won the game!! Wohooo", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        ac.addAction(UIAlertAction(title: "Play again", style: .default) { _ in
+            self.resetBoard()
+        })
+        
+        if gameOver {
+            present(ac, animated: true)
+        } else {
+            // reload button
+            resetBoard()
+        }
+    }
+    
+    private func resetBoard() {
+        gameOver = false
+        gameScore = 0
+        gameRowsIndex = 0
+        playNextLevel()
     }
 
     private func playNextLevel() {
@@ -69,9 +102,6 @@ class ViewController: UICollectionViewController {
         currentLevelTuple.removeAll()
         matchedPairs.removeAll()
         shouldMatchValue = ""
-
-        // Increase the number of rows
-        gameRowsIndex += 1
 
         // Generate a new game array
         setupGameArray()
