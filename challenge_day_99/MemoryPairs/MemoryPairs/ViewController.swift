@@ -22,7 +22,11 @@ class ViewController: UICollectionViewController {
     var selectedItem: Int = 0
 
     var gameOver: Bool = false
-    var gameScore: Int = 0
+    var gameScore: Int = 0 {
+        didSet {
+            title = "Score: \(gameScore)"
+        }
+    }
     var levelMatchScore = 0 {
         didSet {
             checkEndLevel()
@@ -31,7 +35,8 @@ class ViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        gameScore = 0
+        setupTopBar()
         setupCollectionViewLayout()
         loadCountriesInfoFromFile(named: "CountriesInfo") { [weak self] result in
             switch result {
@@ -44,39 +49,47 @@ class ViewController: UICollectionViewController {
                 assertionFailure(error.localizedDescription)
             }
         }
-
+    }
+    
+    private func setupTopBar() {
+        let resetButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(resetGame(_:)))
+        navigationItem.leftBarButtonItem = resetButton
     }
 
     private func checkEndLevel() {
-        if gameRowsIndex == gameRows.count - 1 {
-            gameOver = true
-        }
-        
         let ac = UIAlertController(title: "You won level \(gameRowsIndex + 1) !!", message: "Lets go to the next one", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Next level", style: .default) { _ in
             if !self.gameOver {
                 // Increase the number of rows
                 self.gameRowsIndex += 1
+                if self.gameScore == 0 {
+                    self.gameScore += 1
+                } else {
+                    self.gameScore *= 2
+                }
                 self.playNextLevel()
             } else {
                 self.resetGame()
             }
         })
         if levelMatchScore == currentLevelTuple.count {
+            if gameRowsIndex == gameRows.count - 1 {
+                gameOver = true
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
                 self?.present(ac, animated: true)
             }
         }
     }
     
-    private func resetGame() {
+    @objc private func resetGame(_ isGameOver: Bool = true) {
         let ac = UIAlertController(title: "Congratulations!", message: "You won the game!! Wohooo", preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Play again", style: .default) { _ in
             self.resetBoard()
         })
         
-        if gameOver {
+        if isGameOver {
             present(ac, animated: true)
         } else {
             // reload button
@@ -88,20 +101,24 @@ class ViewController: UICollectionViewController {
         gameOver = false
         gameScore = 0
         gameRowsIndex = 0
-        playNextLevel()
+
+        resetVariables()
+        setupGameArray()
+        collectionView.reloadData()
     }
-
-    private func playNextLevel() {
-        // Delete the matched pairs
-        collectionView.deleteItems(at: matchedPairs)
-
-        // Reset variables
+    
+    private func resetVariables() {
         levelMatchScore = 0
         selectedItem = 0
         randomLevelInfo.removeAll()
         currentLevelTuple.removeAll()
         matchedPairs.removeAll()
         shouldMatchValue = ""
+    }
+
+    private func playNextLevel() {
+        collectionView.deleteItems(at: matchedPairs)
+        resetVariables()
 
         // Generate a new game array
         setupGameArray()
@@ -137,7 +154,6 @@ class ViewController: UICollectionViewController {
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
         let collectionViewLayout = CollectionViewLayout()
         collectionViewLayout.numberOfItemsPerRow = CGFloat(gameRows[gameRowsIndex])
-//        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.setCollectionViewLayout(collectionViewLayout, animated: true)
     }
 
